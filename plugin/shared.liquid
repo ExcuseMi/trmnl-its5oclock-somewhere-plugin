@@ -1,14 +1,124 @@
 {% template main %}
-<div class="layout layout--center {{layout}}">
-  <div class="text--center {{title_class}} ">
-    It's 5 o'clock in <strong>{{data.name}}</strong>
-  </div>
-  <div class="flex flex--col {{qr_margin}}">
-    <div class="{{qr_large}}">{{data.url | qr_code: 6, 'm'}}</div>
-    <div class="hidden {{qr_small}}">{{data.url | qr_code: 2, 's'}}</div>
-    <span class="description">Where the heck is {{data.name}} ?</span>
+{% if data.count > 0 %}
+{% assign rand = "now" | date: '%N' | modulo: data.count %}
+{% for city in data.cities limit:1 offset:rand %}
 
+<style>
+  .map-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  #map-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  #map-svg image {
+    filter: none;
+  }
+
+  .map-overlay {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    pointer-events: none;
+  }
+
+  .text-container {
+    flex: 0 0 auto;
+    padding: 20px 20px 0 20px;
+    text-align: center;
+    pointer-events: auto;
+  }
+
+  .text-container .text--center {
+    padding: 8px 16px;
+    border-radius: 40px;
+    display: inline-block;
+    backdrop-filter: blur(2px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  .qr-fallback {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+  }
+</style>
+
+<div id="city-data" 
+  data-name="{{ city.name }}"
+  data-lat="{{ city.lat }}"
+  data-lon="{{ city.lon }}"
+  data-country="{{ city.country }}"
+  style="display:none;"></div>
+
+<!-- Map as background -->
+<div class="map-background bg--gray-50">
+  <svg id="map-svg" class="image image-dither" viewBox="0 0 768 768" preserveAspectRatio="xMidYMid slice">
+    <g id="map-tiles"></g>
+    <g id="pin-group"></g> <!-- Pin will be added here -->
+  </svg>
+</div>
+
+<!-- Content on top -->
+<div class="map-overlay">
+  <div class="text-container">
+    <div class="text--center {{title_class}} bg--white rounded--large">
+      It's 5 o'clock in <strong>{{ city.name }}</strong>{% if city.country != '' %}, {{ city.country }}{% endif %}
+    </div>
   </div>
+
+  <div class="spacer"></div>
+
+  {% if variables.show_mode == 'qr' %}
+  <div class="qr-fallback" style="display:flex; position: relative; margin: 0 auto;">
+    <div>{{ city.maps_url | qr_code: 8, 'm' }}</div>
+    <span style="margin-top:8px;">Find {{ city.name }} on Maps</span>
+  </div>
+  {% else %}
+  <div id="qr-fallback" class="qr-fallback">
+    {{ city.maps_url | qr_code: 8, 'm' }}
+    <span>Find {{ city.name }} on Maps</span>
+  </div>
+  {% endif %}
+</div>
+
+<div class="title_bar" style="position: relative; z-index: 3;">
+  <span class="title {{titlebar_long_class}}">
+    Where in the world is it 5 o'clock?
+  </span>
+  <span class="title hidden {{titlebar_short_class}}">
+    Where is it 5 o'clock?
+  </span>
+</div>
+{% endfor %}
+{% else %}
+<div class="layout layout--center">
+  <div class="text--center title--large">It's always 5 o'clock somewhere!</div>
 </div>
 
 <div class="title_bar">
@@ -19,4 +129,220 @@
     Where is it 5 o'clock?
   </span>
 </div>
+{% endif %}
+
+<script>
+  (function() {
+    'use strict';
+
+    console.log('Map script starting...');
+
+    const TILE_SIZE = 256;
+    const ZOOM = 7;
+    const VIEW_SIZE = 768;
+
+    const SUBDOMAINS = ['a', 'b', 'c', 'd'];
+
+    const config = {
+      viewWidth: VIEW_SIZE,
+      viewHeight: VIEW_SIZE,
+      tileSize: TILE_SIZE,
+      zoom: ZOOM
+    };
+
+    function latLonToTile(lat, lon, zoom) {
+      const n = Math.pow(2, zoom);
+      const latRad = lat * Math.PI / 180;
+      const x = (lon + 180) / 360 * n;
+      const y = (1 - Math.asinh(Math.tan(latRad)) / Math.PI) / 2 * n;
+      return { x, y };
+    }
+
+    function latLonToPixels(lat, lon, centerTile) {
+      const tile = latLonToTile(lat, lon, config.zoom);
+      const leftTile = centerTile.x - 1;
+      const topTile = centerTile.y - 1;
+      const tileOffsetX = tile.x - leftTile;
+      const tileOffsetY = tile.y - topTile;
+      const px = tileOffsetX * config.tileSize;
+      const py = tileOffsetY * config.tileSize;
+      return { x: Math.round(px), y: Math.round(py) };
+    }
+
+    function calculateTileInfo(lat, lon) {
+      const tile = latLonToTile(lat, lon, ZOOM);
+      const centerX = Math.floor(tile.x);
+      const centerY = Math.floor(tile.y);
+
+      return {
+        centerTile: { x: centerX, y: centerY },
+        tilePos: tile,
+        fractional: {
+          x: tile.x - centerX,
+          y: tile.y - centerY
+        },
+        lat: lat,
+        lon: lon
+      };
+    }
+
+    // Returns the SVG-unit Y offset needed to shift the city pin into the
+    // safe zone between the title text (top) and the title bar (bottom).
+    // Only Y is adjusted; X stays centred naturally.
+    function computeSafeOffsetY(cityPosY) {
+      const svg      = document.getElementById('map-svg');
+      const titleEl  = document.querySelector('.text-container');
+      const barEl    = document.querySelector('.title_bar');
+      if (!svg || !titleEl || !barEl) return 0;
+
+      const { width: screenW, height: screenH } = svg.getBoundingClientRect();
+      const titlePx = titleEl.getBoundingClientRect().height;
+      const barPx   = barEl.getBoundingClientRect().height;
+
+      // Scale applied by xMidYMid slice
+      const scale = Math.max(screenW / VIEW_SIZE, screenH / VIEW_SIZE);
+
+      // SVG units cropped from top/bottom due to slice scaling
+      const cropY = (VIEW_SIZE - screenH / scale) / 2;
+
+      // Safe zone boundaries in SVG units (16 px breathing room on each side)
+      const pad        = 16 / scale;
+      const topEdge    = cropY + titlePx / scale + pad;
+      const bottomEdge = VIEW_SIZE - cropY - barPx / scale - pad;
+
+      const safeCenterY = (topEdge + bottomEdge) / 2;
+      return Math.round(safeCenterY - cityPosY);
+    }
+
+    function renderMap(tileInfo) {
+      const mapTiles = document.getElementById('map-tiles');
+      if (!mapTiles) return;
+
+      mapTiles.innerHTML = '';
+
+      const centerX  = tileInfo.centerTile.x;
+      const centerY  = tileInfo.centerTile.y;
+      const n        = Math.pow(2, ZOOM);
+      const cityPos  = latLonToPixels(tileInfo.lat, tileInfo.lon, tileInfo.centerTile);
+      const offsetY  = computeSafeOffsetY(cityPos.y);
+
+      for (let dy = -2; dy <= 2; dy++) {
+        for (let dx = -1; dx <= 1; dx++) {
+          const tx = (centerX + dx + n) % n;
+          const ty = centerY + dy;
+
+          if (ty < 0 || ty >= n) continue;
+
+          const x = (dx + 1) * TILE_SIZE;
+          const y = (dy + 1) * TILE_SIZE;
+
+          const patternId = `tile-${tx}-${ty}-${dx}-${dy}`;
+
+          const pattern = document.createElementNS('http://www.w3.org/2000/svg', 'pattern');
+          pattern.setAttribute('id', patternId);
+          pattern.setAttribute('patternUnits', 'userSpaceOnUse');
+          pattern.setAttribute('x', x);
+          pattern.setAttribute('y', y);
+          pattern.setAttribute('width', TILE_SIZE);
+          pattern.setAttribute('height', TILE_SIZE);
+
+          const img = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+
+          const subdomain = SUBDOMAINS[(tx + ty) % SUBDOMAINS.length];
+          const tileUrl = `https://${subdomain}.basemaps.cartocdn.com/light_all/${ZOOM}/${tx}/${ty}.png`;
+
+          img.setAttributeNS('http://www.w3.org/1999/xlink', 'href', tileUrl);
+          img.setAttribute('width', TILE_SIZE);
+          img.setAttribute('height', TILE_SIZE);
+          img.setAttribute('preserveAspectRatio', 'none');
+
+          img.addEventListener('error', function() {
+            const fallbackUrl = `https://tile.openstreetmap.org/${ZOOM}/${tx}/${ty}.png`;
+            this.setAttributeNS('http://www.w3.org/1999/xlink', 'href', fallbackUrl);
+          });
+
+          pattern.appendChild(img);
+
+          let defs = document.querySelector('#map-svg defs');
+          if (!defs) {
+            defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+            document.querySelector('#map-svg').appendChild(defs);
+          }
+          defs.appendChild(pattern);
+
+          const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+          rect.setAttribute('x', x);
+          rect.setAttribute('y', y);
+          rect.setAttribute('width', TILE_SIZE);
+          rect.setAttribute('height', TILE_SIZE);
+          rect.setAttribute('fill', `url(#${patternId})`);
+          rect.setAttribute('shape-rendering', 'crispEdges');
+
+          mapTiles.appendChild(rect);
+        }
+      }
+
+      // Shift the whole tile group and pin group by the same Y offset
+      mapTiles.setAttribute('transform', `translate(0, ${offsetY})`);
+      addPinToSVG(tileInfo.lat, tileInfo.lon, tileInfo.centerTile, offsetY);
+    }
+
+    function addPinToSVG(lat, lon, centerTile, offsetY) {
+      const pinGroup = document.getElementById('pin-group');
+      if (!pinGroup) return;
+
+      pinGroup.innerHTML = '';
+
+      const pos = latLonToPixels(lat, lon, centerTile);
+
+      const pin = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      // Tip of the 18×26 pin shape is at (9, 26); place it at the city coords + shift
+      pin.setAttribute('transform', `translate(${pos.x - 9}, ${pos.y - 26 + offsetY})`);
+
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('d', 'M9 0C4.03 0 0 4.03 0 9c0 6.75 9 17 9 17s9-10.25 9-17C18 4.03 13.97 0 9 0z');
+      path.setAttribute('fill', 'black');
+      path.setAttribute('stroke', 'white');
+      path.setAttribute('stroke-width', '1.5');
+      pin.appendChild(path);
+
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      circle.setAttribute('cx', '9');
+      circle.setAttribute('cy', '9');
+      circle.setAttribute('r', '3.5');
+      circle.setAttribute('fill', 'white');
+      pin.appendChild(circle);
+
+      pinGroup.appendChild(pin);
+    }
+
+
+    function init() {
+      const cityData = document.getElementById('city-data');
+      if (!cityData) return;
+
+      const lat = parseFloat(cityData.dataset.lat);
+      const lon = parseFloat(cityData.dataset.lon);
+
+      if (isNaN(lat) || isNaN(lon)) return;
+
+      console.log('City:', cityData.dataset.name, { lat, lon });
+
+      const tileInfo = calculateTileInfo(lat, lon);
+      console.log('Tile info:', tileInfo);
+
+      config.centerTile = tileInfo.centerTile;
+
+      renderMap(tileInfo);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+
+    window.addEventListener('load', init);
+  })();
+</script>
 {% endtemplate %}

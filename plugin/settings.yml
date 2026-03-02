@@ -4,7 +4,8 @@ no_screen_padding: 'no'
 dark_mode: 'no'
 static_data: ''
 polling_verb: get
-polling_url: https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/csv/cities.csv
+polling_url: |-
+  {% assign h = trmnl.system.timestamp_utc | date: "%H" | plus: 0 %}{% assign offset = 17 | minus: h %}{% if offset > 14 %}{% assign offset = 14 %}{% endif %}{% if offset >= 0 %}https://raw.githubusercontent.com/ExcuseMi/trmnl-its5oclock-somewhere-plugin/refs/heads/main/data/cities/utc%2B{{ offset }}.json{% else %}https://raw.githubusercontent.com/ExcuseMi/trmnl-its5oclock-somewhere-plugin/refs/heads/main/data/cities/utc{{ offset }}.json{% endif %}
 polling_headers: ''
 polling_body: ''
 id: 253752
@@ -16,4 +17,4 @@ custom_fields:
   category: travel,life
   learn_more_url: https://wherefiveoclock.com/
 name: It's 5 O'Clock Somewhere
-refresh_interval: 1440
+refresh_interval: 60
