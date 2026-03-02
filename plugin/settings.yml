@@ -4,8 +4,7 @@ no_screen_padding: 'no'
 dark_mode: 'no'
 static_data: ''
 polling_verb: get
-polling_url: |-
-  {% assign h = trmnl.system.timestamp_utc | date: "%H" | plus: 0 %}{% assign offset = 17 | minus: h %}{% if offset > 14 %}{% assign offset = 14 %}{% endif %}{% if offset >= 0 %}https://raw.githubusercontent.com/ExcuseMi/trmnl-its5oclock-somewhere-plugin/refs/heads/main/data/cities/utc%2B{{ offset }}.json{% else %}https://raw.githubusercontent.com/ExcuseMi/trmnl-its5oclock-somewhere-plugin/refs/heads/main/data/cities/utc{{ offset }}.json{% endif %}
+polling_url: '{% assign h = trmnl.system.timestamp_utc | date: "%H" | plus: 0 %}{% assign offset = 17 | minus: h %}{% if offset > 14 %}{% assign offset = 14 %}{% endif %}{% if offset >= 0 %}https://raw.githubusercontent.com/ExcuseMi/trmnl-its5oclock-somewhere-plugin/refs/heads/main/data/cities/utc%2B{{ offset }}.json{% else %}https://raw.githubusercontent.com/ExcuseMi/trmnl-its5oclock-somewhere-plugin/refs/heads/main/data/cities/utc{{ offset }}.json{% endif %}'
 polling_headers: ''
 polling_body: ''
 id: 253752
@@ -13,8 +12,9 @@ custom_fields:
 - keyname: author_bio
   field_type: author_bio
   name: About This Plugin
-  description: It's always 5o clock somewhere!
+  help_text: TRMNL X Ready
+  description: Every hour, discover a new city around the world where it's exactly 5 PM.<br />A live map shows you just where to raise your glass, because <strong>it's always 5 o'clock somewhere!</strong>
   category: travel,life
   learn_more_url: https://wherefiveoclock.com/
 name: It's 5 O'Clock Somewhere
-refresh_interval: 60
+refresh_interval: 1440
