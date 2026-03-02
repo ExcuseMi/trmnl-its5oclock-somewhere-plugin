@@ -22,106 +22,56 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
     z-index: 1;
     overflow: hidden;
   }
 
-  #map-svg {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-
-  #map-svg image {
-    filter: none;
-  }
 
   .map-overlay {
     position: relative;
     z-index: 2;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
     pointer-events: none;
   }
 
   .text-container {
     flex: 0 0 auto;
-    padding: 20px 20px 0 20px;
-    text-align: center;
     pointer-events: auto;
   }
 
   .text-container .text--center {
     padding: 8px 16px;
-    border-radius: 40px;
     display: inline-block;
     backdrop-filter: blur(2px);
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   }
 
-  .spacer {
-    flex: 1 1 auto;
-  }
-
-  .qr-fallback {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 3;
-  }
 </style>
 
-<div id="city-data" 
+<div id="city-data" class="hidden"
   data-name="{{ city.name }}"
   data-lat="{{ city.lat }}"
   data-lon="{{ city.lon }}"
-  data-country="{{ city.country }}"
-  style="display:none;"></div>
+  data-country="{{ city.country }}"></div>
 
 <!-- Map as background -->
-<div class="map-background bg--gray-50">
-  <svg id="map-svg" class="image image-dither" viewBox="0 0 768 768" preserveAspectRatio="xMidYMid slice">
+<div class="map-background bg--gray-50 w--full h--full">
+  <svg id="map-svg" class="image image-dither w--full h--full" viewBox="0 0 768 768" preserveAspectRatio="xMidYMid slice">
     <g id="map-tiles"></g>
     <g id="pin-group"></g> <!-- Pin will be added here -->
   </svg>
 </div>
 
 <!-- Content on top -->
-<div class="map-overlay">
-  <div class="text-container">
+<div class="map-overlay w--full h--full flex flex--col">
+  <div class="text-container text--center pt--5 pr--5 pb--0 pl--5">
     <div class="text--center {{title_class}} bg--white rounded--large">
       It's 5 o'clock in <strong>{{ city.name }}</strong>{% if city.country != '' %}, {{ city.country }}{% endif %}
     </div>
   </div>
 
-  <div class="spacer"></div>
-
-  {% if variables.show_mode == 'qr' %}
-  <div class="qr-fallback" style="display:flex; position: relative; margin: 0 auto;">
-    <div>{{ city.maps_url | qr_code: 8, 'm' }}</div>
-    <span style="margin-top:8px;">Find {{ city.name }} on Maps</span>
-  </div>
-  {% else %}
-  <div id="qr-fallback" class="qr-fallback">
-    {{ city.maps_url | qr_code: 8, 'm' }}
-    <span>Find {{ city.name }} on Maps</span>
-  </div>
-  {% endif %}
 </div>
 
-<div class="title_bar" style="position: relative; z-index: 3;">
+<div class="title_bar">
   {{ icon }}
   <span class="title {{titlebar_long_class}}">
     Where in the world is it 5 o'clock?
