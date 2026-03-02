@@ -1,0 +1,22 @@
+{% template main %}
+<div class="layout layout--center {{layout}}">
+  <div class="text--center {{title_class}} ">
+    It's 5 o'clock in <strong>{{data.name}}</strong>
+  </div>
+  <div class="flex flex--col {{qr_margin}}">
+    <div class="{{qr_large}}">{{data.url | qr_code: 6, 'm'}}</div>
+    <div class="hidden {{qr_small}}">{{data.url | qr_code: 2, 's'}}</div>
+    <span class="description">Where the heck is {{data.name}} ?</span>
+
+  </div>
+</div>
+
+<div class="title_bar">
+  <span class="title {{titlebar_long_class}}">
+    Where in the world is it 5 o'clock?
+  </span>
+  <span class="title hidden {{titlebar_short_class}}">
+    Where is it 5 o'clock?
+  </span>
+</div>
+{% endtemplate %}

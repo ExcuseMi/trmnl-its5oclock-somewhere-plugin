@@ -1,0 +1,19 @@
+---
+strategy: polling
+no_screen_padding: 'no'
+dark_mode: 'no'
+static_data: ''
+polling_verb: get
+polling_url: https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/csv/cities.csv
+polling_headers: ''
+polling_body: ''
+id: 253752
+custom_fields:
+- keyname: author_bio
+  field_type: author_bio
+  name: About This Plugin
+  description: It's always 5o clock somewhere!
+  category: travel,life
+  learn_more_url: https://wherefiveoclock.com/
+name: It's 5 O'Clock Somewhere
+refresh_interval: 1440
