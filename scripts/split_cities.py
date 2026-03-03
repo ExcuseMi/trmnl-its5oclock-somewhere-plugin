@@ -42,7 +42,7 @@ OUTPUT_DIR = ROOT / "data" / "cities"
 TOASTS_FILE         = ROOT / "data" / "toasts.json"
 NAME_OVERRIDES_FILE = ROOT / "data" / "name_overrides.json"
 
-MAX_CITIES_PER_FILE = 1000  # Set to an int (e.g. 1000) to cap cities per file
+MAX_CITIES_PER_FILE = 500  # Set to an int (e.g. 1000) to cap cities per file
 
 # Countries where zoom 7 shows only ocean — keyed by country_name from CSV
 ISLAND_ZOOM = {
