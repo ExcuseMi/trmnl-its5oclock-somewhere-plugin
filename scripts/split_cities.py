@@ -6,6 +6,22 @@ offset via zoneinfo (respects DST), and writes:
   data/cities/utc+N.json
   data/cities/utc-N.json   (etc. for every offset that exists right now)
 
+Output format per file:
+  {
+    "France": {"toast": "Santé", "cities": [{"name":..,"lat":..,"lon":..}, ...]},
+    "United Kingdom": {
+      "toast": "Cheers",
+      "cities": [
+        {"name": "London", ...},
+        {"name": "Cardiff", ..., "toast": "Iechyd da", "pronunciation": "Yeh-hid dah"}
+      ]
+    }
+  }
+
+Country-level toast is stored once per country. Cities only carry a toast
+override when they resolve at state or city level (e.g. Welsh/Scottish regions).
+Files are capped at MAX_CITIES_PER_FILE entries, spread across countries.
+
 Run manually or via the GitHub Action (.github/workflows/update-cities.yml)
 which fires every 6 hours so DST transitions are always reflected within 6h.
 """
@@ -23,8 +39,10 @@ ROOT       = Path(__file__).parent.parent
 CSV_URL    = "https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/csv/cities.csv"
 CSV_FILE   = ROOT / "cities.csv"
 OUTPUT_DIR = ROOT / "data" / "cities"
-TOASTS_FILE        = ROOT / "data" / "toasts.json"
+TOASTS_FILE         = ROOT / "data" / "toasts.json"
 NAME_OVERRIDES_FILE = ROOT / "data" / "name_overrides.json"
+
+MAX_CITIES_PER_FILE = None  # Set to an int (e.g. 1000) to cap cities per file
 
 # Countries where zoom 7 shows only ocean — keyed by country_name from CSV
 ISLAND_ZOOM = {
@@ -97,7 +115,10 @@ print(f"  {len(cities)} cities")
 now = datetime.now(tz=timezone.utc)
 print(f"Computing offsets for {now.strftime('%Y-%m-%d %H:%M UTC')} ...")
 
-buckets: dict[str, list] = {}
+# buckets[utc_key][country] = {"t"?: str, "p"?: str, "c": [...]}
+# Single-char keys: t=toast, p=pronunciation, c=cities, n=name, y=lat, x=lon, z=zoom
+buckets: dict[str, dict] = {}
+
 for city in cities:
     try:
         zone           = zoneinfo.ZoneInfo(city["tz"])
@@ -109,17 +130,74 @@ for city in cities:
     sign      = "+" if offset_hours >= 0 else ""
     hours_str = f"{offset_hours:.1f}".rstrip("0").rstrip(".")
     key       = f"utc{sign}{hours_str}"
-    toast, pronunciation = resolve_toast(city["name"], city["state"], city["country"])
-    entry = {"name": city["name"], "lat": city["lat"],
-             "lon": city["lon"], "country": city["country"]}
-    if toast:
-        entry["toast"] = toast
-    if pronunciation:
-        entry["pronunciation"] = pronunciation
-    zoom = ISLAND_ZOOM.get(city["country"])
+    country   = city["country"]
+
+    if key not in buckets:
+        buckets[key] = {}
+
+    if country not in buckets[key]:
+        # Store country-level toast once
+        raw = _toast_countries.get(country, "")
+        entry: dict = {"c": []}
+        if isinstance(raw, dict):
+            if raw.get("toast"):
+                entry["t"] = raw["toast"]
+            if raw.get("pronunciation"):
+                entry["p"] = raw["pronunciation"]
+        elif raw:
+            entry["t"] = raw
+        buckets[key][country] = entry
+
+    # Build city entry — embed toast only for state/city-level overrides
+    city_entry: dict = {"n": city["name"], "y": city["lat"], "x": city["lon"]}
+
+    city_key  = f"{city['name']}, {country}"
+    state_key = f"{city['state']}, {country}" if city["state"] else None
+    if _toast_cities.get(city_key) or (state_key and _toast_states.get(state_key)):
+        t, p = resolve_toast(city["name"], city["state"], country)
+        city_entry["t"] = t
+        if p:
+            city_entry["p"] = p
+
+    zoom = ISLAND_ZOOM.get(country)
     if zoom:
-        entry["zoom"] = zoom
-    buckets.setdefault(key, []).append(entry)
+        city_entry["z"] = zoom
+
+    buckets[key][country]["c"].append(city_entry)
+
+# ── Cap cities per file, maximising country diversity ─────────────────────────
+def cap_bucket(country_data: dict, max_cities) -> dict:
+    if max_cities is None:
+        return country_data
+    total = sum(len(v["c"]) for v in country_data.values())
+    if total <= max_cities:
+        return country_data
+
+    # Round-robin: take 1 city per country per round until cap is hit.
+    # This maximises country diversity before any country gets a second city.
+    result: dict = {
+        name: {k: v for k, v in d.items() if k != "c"} | {"c": []}
+        for name, d in country_data.items()
+    }
+    country_list = list(country_data.keys())
+    indices      = {name: 0 for name in country_list}
+    taken        = 0
+
+    while taken < max_cities:
+        added = False
+        for name in country_list:
+            if taken >= max_cities:
+                break
+            idx = indices[name]
+            if idx < len(country_data[name]["c"]):
+                result[name]["c"].append(country_data[name]["c"][idx])
+                indices[name] += 1
+                taken += 1
+                added  = True
+        if not added:
+            break  # All countries exhausted
+
+    return {name: d for name, d in result.items() if d["c"]}
 
 # ── Write files ───────────────────────────────────────────────────────────────
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -129,10 +207,14 @@ for fname in os.listdir(OUTPUT_DIR):
     if fname.startswith("utc") and fname.endswith(".json"):
         os.remove(OUTPUT_DIR / fname)
 
-for key, city_list in sorted(buckets.items()):
+total_entries = 0
+for key, country_data in sorted(buckets.items()):
+    capped = cap_bucket(country_data, MAX_CITIES_PER_FILE)
+    total_entries += sum(len(v["c"]) for v in capped.values())
     with open(OUTPUT_DIR / f"{key}.json", "w", encoding="utf-8") as f:
-        json.dump(city_list, f, ensure_ascii=False)
+        json.dump(capped, f, ensure_ascii=False)
 
 print(f"  {len(buckets)} offset files written to {OUTPUT_DIR}/")
-print(f"  {sum(len(v) for v in buckets.values())} total entries")
+cap_note = f"capped at {MAX_CITIES_PER_FILE} per file" if MAX_CITIES_PER_FILE else "unlimited"
+print(f"  {total_entries} total entries ({cap_note})")
 print("Done.")
