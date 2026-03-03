@@ -4,13 +4,12 @@
 {% assign city = data.cities[rand] %}
 {% capture cheers_icon %}
 <svg class="w--6 h--6 image--stroke" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M6 3h12l-4 8a2 2 0 01-4 0L6 3z"/>
+  <!-- Bowl fill (behind olive) -->
+  <path d="M6 3h12l-4 8a2 2 0 01-4 0L6 3z" fill="currentColor" fill-opacity="0.15" stroke="none"/>
+  <!-- Glass outline drawn on top -->
+  <path d="M6 3h12l-4 8a2 2 0 01-4 0L6 3z" fill="none"/>
   <line x1="12" y1="11" x2="12" y2="19"/>
   <line x1="8" y1="19" x2="16" y2="19"/>
-  <!-- Olive on a pick sticking out of the glass -->
-  <line x1="10" y1="8" x2="16" y2="1" stroke="currentColor" stroke-width="1"/>
-  <circle cx="10" cy="8" r="2" fill="currentColor" stroke="none"/>
-  <circle cx="10" cy="8" r="0.8" fill="white" stroke="none"/>
 </svg>
 {% endcapture %}
 {% capture icon %}
@@ -85,7 +84,7 @@
   <span class="title {% if view < 3 %}hidden{% endif %}">
     5 O'Clock
   </span>
-  {% if city.toast %}
+  {% if city.toast and trmnl.plugin_settings.custom_fields_values.show_toast == "true" %}
   <span class="instance {% if view >= 3 %}hidden{% endif %}">
         <div class="flex flex--row gap--small flex--right flex--center-y">
 
@@ -209,7 +208,7 @@
       const offsets = computeOffsets(cityPos);
 
       for (let dy = -2; dy <= 2; dy++) {
-        for (let dx = -3; dx <= 3; dx++) {
+        for (let dx = -2; dx <= 2; dx++) {
           const tx = (centerX + dx + n) % n;
           const ty = centerY + dy;
 

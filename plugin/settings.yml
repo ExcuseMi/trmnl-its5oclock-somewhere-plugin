@@ -12,9 +12,16 @@ custom_fields:
 - keyname: author_bio
   field_type: author_bio
   name: About This Plugin
+  description: "Discover a new city around the world where it's exactly 5 PM.<br />A live map shows you just where to raise your glass, because <strong>it's always 5 o'clock somewhere!</strong>"
   help_text: TRMNL X Ready
-  description: Every hour, discover a new city around the world where it's exactly 5 PM.<br />A live map shows you just where to raise your glass, because <strong>it's always 5 o'clock somewhere!</strong>
   category: life
-  github_url: https://github.com/ExcuseMi/trmnl-its5oclock-somewhere-plugin
+  github_url: "https://github.com/ExcuseMi/trmnl-its5oclock-somewhere-plugin"
+- keyname: show_toast
+  field_type: boolean
+  name: Show local toast
+  optional: false
+  default: true
+  description: "Display a local toast phrase in the title bar — like <em>Cheers</em> or <em>Santé</em> — in the language spoken where it's 5 o'clock."
+  help_text: "Appears as an icon + phrase on the right side of the title bar."
 name: It's 5 O'Clock Somewhere
 refresh_interval: 1440
