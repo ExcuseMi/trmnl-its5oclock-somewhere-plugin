@@ -10,6 +10,7 @@ on:
       - '.github/workflows/update-cities.yml'
       - 'scripts/split_cities.py'
       - 'data/toasts.json'
+      - 'data/timezone_overrides.json'
 
 # Grant explicit permissions
 permissions:
@@ -29,13 +30,16 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Cache cities.csv
+      - name: Cache GeoNames files
         uses: actions/cache@v4
         with:
-          path: cities.csv
-          # Refresh the CSV at most once a week
-          key: cities-csv-${{ github.run_id }}
-          restore-keys: cities-csv-
+          path: |
+            cities15000.txt
+            countryInfo.txt
+            admin1CodesASCII.txt
+          # Refresh GeoNames data at most once a week
+          key: geonames-${{ github.run_id }}
+          restore-keys: geonames-
 
       - name: Install dependencies
         run: pip install tzdata

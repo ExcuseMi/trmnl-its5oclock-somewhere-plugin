@@ -1,8 +1,8 @@
 """
 Generates DST-accurate city files for the current moment.
 
-Reads cities.csv (downloaded if absent), computes each city's current UTC
-offset via zoneinfo (respects DST), and writes:
+Reads cities15000.txt from GeoNames (downloaded + extracted if absent), computes
+each city's current UTC offset via zoneinfo (respects DST), and writes:
   data/cities/utc+N.json
   data/cities/utc-N.json   (etc. for every offset that exists right now)
 
@@ -26,46 +26,59 @@ Run manually or via the GitHub Action (.github/workflows/update-cities.yml)
 which fires every 6 hours so DST transitions are always reflected within 6h.
 """
 
-import csv
 import json
 import os
 import urllib.request
+import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 import zoneinfo
 
 # ── Paths (always relative to the project root, regardless of cwd) ────────────
 ROOT       = Path(__file__).parent.parent
-CSV_URL    = "https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/csv/cities.csv"
-CSV_FILE   = ROOT / "cities.csv"
 OUTPUT_DIR = ROOT / "data" / "cities"
-TOASTS_FILE         = ROOT / "data" / "toasts.json"
-NAME_OVERRIDES_FILE = ROOT / "data" / "name_overrides.json"
+TOASTS_FILE             = ROOT / "data" / "toasts.json"
+NAME_OVERRIDES_FILE     = ROOT / "data" / "name_overrides.json"
+TIMEZONE_OVERRIDES_FILE = ROOT / "data" / "timezone_overrides.json"
 
-MAX_CITIES_PER_FILE = 500  # Set to an int (e.g. 1000) to cap cities per file
+# GeoNames source files (downloaded if absent, not committed to repo)
+GEONAMES_ZIP_URL     = "https://download.geonames.org/export/dump/cities15000.zip"
+GEONAMES_ZIP_FILE    = ROOT / "cities15000.zip"
+GEONAMES_TXT_FILE    = ROOT / "cities15000.txt"
+COUNTRY_INFO_URL     = "https://download.geonames.org/export/dump/countryInfo.txt"
+COUNTRY_INFO_FILE    = ROOT / "countryInfo.txt"
+ADMIN1_URL           = "https://download.geonames.org/export/dump/admin1CodesASCII.txt"
+ADMIN1_FILE          = ROOT / "admin1CodesASCII.txt"
 
-# Countries where zoom 7 shows only ocean — keyed by country_name from CSV
+MAX_CITIES_PER_FILE = 500  # Set to None to disable cap
+
+# Countries where zoom 7 shows only ocean — keyed by country_name from GeoNames
 ISLAND_ZOOM = {
     # Tiny atolls / < 5 km
     "Maldives": 11, "Tuvalu": 11, "Nauru": 11, "Tokelau": 11,
-    "Saint Kitts and Nevis": 11, "Wallis and Futuna": 11,
+    "Saint Kitts and Nevis": 11, "Wallis and Futuna Islands": 11,
     # Very small islands / 5–30 km
-    "Marshall Islands": 10, "Kiribati": 10, "Micronesia": 10,
+    "Marshall Islands": 10, "Kiribati": 10, "Federated States of Micronesia": 10,
     "Palau": 10, "Niue": 10, "Cook Islands": 10, "Tonga": 10,
     "Barbados": 10, "Grenada": 10, "Saint Lucia": 10,
     "Saint Vincent and the Grenadines": 10, "Antigua and Barbuda": 10,
     "Dominica": 10, "Comoros": 10, "Seychelles": 10,
-    "São Tomé and Príncipe": 10, "Malta": 10, "Bahrain": 10,
+    "Sao Tome and Principe": 10, "Malta": 10, "Bahrain": 10,
     "Singapore": 10,
     # Small islands / 30–150 km
     "Samoa": 9, "Vanuatu": 9, "Solomon Islands": 9, "Fiji": 9,
-    "Trinidad and Tobago": 9, "Mauritius": 9, "Cabo Verde": 9,
-    "Timor-Leste": 9,
+    "Trinidad and Tobago": 9, "Mauritius": 9, "Cape Verde": 9,
+    "East Timor": 9,
 }
 
 # ── Load name overrides ───────────────────────────────────────────────────────
 with open(NAME_OVERRIDES_FILE, encoding="utf-8") as _f:
     _name_overrides = json.load(_f)
+
+# ── Load timezone overrides ───────────────────────────────────────────────────
+# Keyed by "City, Country" to fix cities with wrong timezone data in GeoNames.
+with open(TIMEZONE_OVERRIDES_FILE, encoding="utf-8") as _f:
+    _timezone_overrides = json.load(_f)
 
 # ── Load toasts lookup ────────────────────────────────────────────────────────
 with open(TOASTS_FILE, encoding="utf-8") as _f:
@@ -115,31 +128,101 @@ def normalise_toast_for_json(raw):
         return raw.get("toast", ""), raw.get("pronunciation", "")
     return raw or "", ""
 
-# ── Download CSV if absent ────────────────────────────────────────────────────
-if not CSV_FILE.exists():
-    print(f"Downloading {CSV_FILE.name} ...")
-    urllib.request.urlretrieve(CSV_URL, CSV_FILE)
+# ── Download GeoNames files if absent ─────────────────────────────────────────
+def _download(url: str, path: Path, label: str) -> None:
+    if not path.exists():
+        print(f"Downloading {label} ...")
+        urllib.request.urlretrieve(url, path)
+        print("Done.")
+    else:
+        print(f"Using existing {path.name}")
+
+_download(COUNTRY_INFO_URL, COUNTRY_INFO_FILE, "countryInfo.txt")
+_download(ADMIN1_URL,        ADMIN1_FILE,        "admin1CodesASCII.txt")
+
+if not GEONAMES_TXT_FILE.exists():
+    _download(GEONAMES_ZIP_URL, GEONAMES_ZIP_FILE, "cities15000.zip")
+    print("Extracting cities15000.txt ...")
+    with zipfile.ZipFile(GEONAMES_ZIP_FILE) as zf:
+        zf.extract("cities15000.txt", ROOT)
     print("Done.")
 else:
-    print(f"Using existing {CSV_FILE.name}")
+    print(f"Using existing {GEONAMES_TXT_FILE.name}")
 
-# ── Parse ─────────────────────────────────────────────────────────────────────
+# ── Build country code → country name lookup ──────────────────────────────────
+# countryInfo.txt is tab-separated; lines starting with # are comments.
+# Fields: ISO, ISO3, ISO-Numeric, FIPS, Country, Capital, ...
+_country_names: dict[str, str] = {}
+with open(COUNTRY_INFO_FILE, encoding="utf-8") as _f:
+    for _line in _f:
+        if _line.startswith("#"):
+            continue
+        _parts = _line.strip().split("\t")
+        if len(_parts) > 4:
+            _country_names[_parts[0]] = _parts[4]  # ISO2 -> English name
+
+# ── Build admin1 code → state name lookup ────────────────────────────────────
+# admin1CodesASCII.txt fields: "{CC}.{admin1}\tname\tasciiname\tgeonameid"
+_admin1_names: dict[str, str] = {}
+with open(ADMIN1_FILE, encoding="utf-8") as _f:
+    for _line in _f:
+        _parts = _line.strip().split("\t")
+        if len(_parts) >= 2:
+            _admin1_names[_parts[0]] = _parts[1]  # "US.CA" -> "California"
+
+# ── Parse cities15000.txt ─────────────────────────────────────────────────────
+# Tab-separated fields (0-based):
+#  0=geonameid  1=name  2=asciiname  3=alternatenames  4=lat  5=lon
+#  6=feature_class  7=feature_code  8=country_code  9=cc2
+#  10=admin1_code  11=admin2_code  12=admin3_code  13=admin4_code
+#  14=population  15=elevation  16=dem  17=timezone  18=modification_date
+#
+# feature_code PPLX = section of populated place (neighbourhood/district).
+# These are often unrecognisable to a global audience, so we exclude them.
+EXCLUDE_FEATURE_CODES = {"PPLX"}
+
+# Priority tier for feature codes — lower = shown first within a country.
+# Capitals and admin seats are preferred over generic populated places.
+FEATURE_PRIORITY = {
+    "PPLC":  0,  # national capital
+    "PPLA":  1,  # state / province capital
+    "PPLA2": 2,  # county / district capital
+    "PPLA3": 3,
+    "PPLA4": 4,
+}
+# Anything not listed gets tier 5 (generic populated place)
+
 print("Parsing cities...")
 cities = []
-with open(CSV_FILE, encoding="utf-8") as f:
-    for row in csv.DictReader(f):
-        tz      = row.get("timezone", "").strip().strip('"')
-        name    = row.get("name", "").strip().strip('"')
+with open(GEONAMES_TXT_FILE, encoding="utf-8") as f:
+    for line in f:
+        parts = line.strip().split("\t")
+        if len(parts) < 18:
+            continue
+        feature_code = parts[7].strip()
+        if feature_code in EXCLUDE_FEATURE_CODES:
+            continue
+        name    = parts[1].strip()
         name    = _name_overrides.get(name, name)
-        lat     = row.get("latitude", "").strip().strip('"')
-        lon     = row.get("longitude", "").strip().strip('"')
-        country = row.get("country_name", "").strip().strip('"')
-        state   = row.get("state_name", "").strip().strip('"')
-        if tz and name and lat and lon:
-            cities.append({"name": name, "lat": float(lat),
-                           "lon": float(lon), "country": country,
-                           "state": state, "tz": tz})
+        lat     = parts[4].strip()
+        lon     = parts[5].strip()
+        cc      = parts[8].strip()
+        admin1  = parts[10].strip()
+        pop_str = parts[14].strip()
+        tz      = parts[17].strip()
+        country = _country_names.get(cc, cc)
+        state   = _admin1_names.get(f"{cc}.{admin1}", "")
+        tz      = _timezone_overrides.get(f"{name}, {country}", tz)
+        if name and lat and lon and tz:
+            cities.append({"name": name, "lat": float(lat), "lon": float(lon),
+                           "country": country, "state": state, "tz": tz,
+                           "pop": int(pop_str) if pop_str.isdigit() else 0,
+                           "tier": FEATURE_PRIORITY.get(feature_code, 5)})
 print(f"  {len(cities)} cities")
+
+# Sort: capitals and admin seats first (tier), then by population descending.
+# cap_bucket's round-robin will therefore always prefer well-known cities.
+cities.sort(key=lambda c: (c["tier"], -c["pop"]))
 
 # ── Bucket by current DST-accurate offset ────────────────────────────────────
 now = datetime.now(tz=timezone.utc)
