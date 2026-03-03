@@ -12,7 +12,7 @@ custom_fields:
 - keyname: author_bio
   field_type: author_bio
   name: About This Plugin
-  description: Discover a new city around the world where it's exactly 5 PM.<br />A live map shows you just where to raise your glass, because <strong>it's always 5 o'clock somewhere!</strong><br /><br />Location by Chehuna from <a href="https://thenounproject.com/browse/icons/term/location/" target="_blank" title="Location Icons">Noun Project</a> (CC BY 3.0)<br />Bar by habione 404 from <a href="https://thenounproject.com/browse/icons/term/bar/" target="_blank" title="Bar Icons">Noun Project</a> (CC BY 3.0)
+  description: Discover a new city around the world where it's exactly 5 PM.<br />A live map shows you just where to raise your glass, because <strong>it's always 5 o'clock somewhere!</strong><br /><br />glass by Leonardo Henrique Martini from <a href="https://thenounproject.com/browse/icons/term/glass/" target="_blank" title="glass Icons">Noun Project</a> (CC BY 3.0)<br />Beer by Massfoday K Toure from <a href="https://thenounproject.com/browse/icons/term/beer/" target="_blank" title="Beer Icons">Noun Project</a> (CC BY 3.0)
   help_text: TRMNL X Ready
   category: life
   github_url: https://github.com/ExcuseMi/trmnl-its5oclock-somewhere-plugin
@@ -22,8 +22,8 @@ custom_fields:
   optional: false
   default: glass
   options:
-    - Wine glass: glass
-    - Beer mug: beer
+  - Martini glass: glass
+  - Beer mug: beer
 - keyname: show_toast
   field_type: boolean
   name: Show local toast
@@ -31,5 +31,5 @@ custom_fields:
   default: true
   description: Display a local toast phrase in the title bar — like <em>Cheers</em> or <em>Santé</em> — in the language spoken where it's 5 o'clock.
   help_text: Appears as an icon + phrase on the right side of the title bar.
-name: "It's 5 O'Clock Somewhere"
+name: " It's 5 O'Clock Somewhere"
 refresh_interval: 60

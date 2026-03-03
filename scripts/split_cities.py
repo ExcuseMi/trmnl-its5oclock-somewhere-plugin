@@ -23,26 +23,13 @@ ROOT       = Path(__file__).parent.parent
 CSV_URL    = "https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/csv/cities.csv"
 CSV_FILE   = ROOT / "cities.csv"
 OUTPUT_DIR = ROOT / "data" / "cities"
-TOASTS_FILE = ROOT / "data" / "toasts.json"
+TOASTS_FILE        = ROOT / "data" / "toasts.json"
+NAME_OVERRIDES_FILE = ROOT / "data" / "name_overrides.json"
 
-# Countries where zoom 7 shows only ocean — keyed by country_name from CSV
-ISLAND_ZOOM = {
-    # Tiny atolls / < 5 km
-    "Maldives": 11, "Tuvalu": 11, "Nauru": 11, "Tokelau": 11,
-    "Saint Kitts and Nevis": 11, "Wallis and Futuna": 11,
-    # Very small islands / 5–30 km
-    "Marshall Islands": 10, "Kiribati": 10, "Micronesia": 10,
-    "Palau": 10, "Niue": 10, "Cook Islands": 10, "Tonga": 10,
-    "Barbados": 10, "Grenada": 10, "Saint Lucia": 10,
-    "Saint Vincent and the Grenadines": 10, "Antigua and Barbuda": 10,
-    "Dominica": 10, "Comoros": 10, "Seychelles": 10,
-    "São Tomé and Príncipe": 10, "Malta": 10, "Bahrain": 10,
-    "Singapore": 10,
-    # Small islands / 30–150 km
-    "Samoa": 9, "Vanuatu": 9, "Solomon Islands": 9, "Fiji": 9,
-    "Trinidad and Tobago": 9, "Mauritius": 9, "Cabo Verde": 9,
-    "Timor-Leste": 9,
-}
+
+# ── Load name overrides ───────────────────────────────────────────────────────
+with open(NAME_OVERRIDES_FILE, encoding="utf-8") as _f:
+    _name_overrides = json.load(_f)
 
 # ── Load toasts lookup ────────────────────────────────────────────────────────
 with open(TOASTS_FILE, encoding="utf-8") as _f:
@@ -77,6 +64,7 @@ with open(CSV_FILE, encoding="utf-8") as f:
     for row in csv.DictReader(f):
         tz      = row.get("timezone", "").strip().strip('"')
         name    = row.get("name", "").strip().strip('"')
+        name    = _name_overrides.get(name, name)
         lat     = row.get("latitude", "").strip().strip('"')
         lon     = row.get("longitude", "").strip().strip('"')
         country = row.get("country_name", "").strip().strip('"')
@@ -110,9 +98,6 @@ for city in cities:
         entry["toast"] = toast
     if pronunciation:
         entry["pronunciation"] = pronunciation
-    zoom = ISLAND_ZOOM.get(city["country"])
-    if zoom:
-        entry["zoom"] = zoom
     buckets.setdefault(key, []).append(entry)
 
 # ── Write files ───────────────────────────────────────────────────────────────
