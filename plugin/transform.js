@@ -40,6 +40,7 @@ function transform(input) {
     country:  c.country || '',
     lat:      c.lat,
     lon:      c.lon,
+    toast:    c.toast || '',
     maps_url: 'https://www.google.com/maps?q=' + c.lat + ',' + c.lon
   }));
 

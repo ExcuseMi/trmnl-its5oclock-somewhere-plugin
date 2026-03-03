@@ -8,7 +8,8 @@ on:
     branches: [ main ]
     paths:
       - '.github/workflows/update-cities.yml'
-      - 'split_cities.py'
+      - 'scripts/split_cities.py'
+      - 'data/toasts.json'
 
 # Grant explicit permissions
 permissions:
@@ -40,7 +41,7 @@ jobs:
         run: pip install tzdata
 
       - name: Generate city offset files
-        run: python split_cities.py
+        run: python scripts/split_cities.py
 
       - name: Commit and push changes
         uses: stefanzweifel/git-auto-commit-action@v7

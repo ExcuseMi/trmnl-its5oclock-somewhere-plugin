@@ -60,7 +60,7 @@
 <div class="map-overlay w--full h--full flex flex--col">
   <div class="text-container text--center pt--5 pr--5 pb--0 pl--5">
     <div class="text--center {{title_class}} bg--white rounded--large">
-      It's 5 o'clock in <strong>{{ city.name }}</strong>{% if city.country != '' %}, {{ city.country }}{% endif %}
+      {% if city.toast != '' %}<strong>{{ city.toast }}!</strong> It's 5 o'clock in{% else %}It's 5 o'clock in{% endif %} <strong>{{ city.name }}</strong>{% if city.country != '' %}, {{ city.country }}{% endif %}
     </div>
   </div>
 

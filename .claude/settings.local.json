@@ -4,7 +4,8 @@
       "WebFetch(domain:raw.githubusercontent.com)",
       "Bash(python:*)",
       "Bash(py:*)",
-      "WebFetch(domain:context7.com)"
+      "WebFetch(domain:context7.com)",
+      "Bash(python3:*)"
     ]
   }
 }
