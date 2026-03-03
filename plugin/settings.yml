@@ -14,7 +14,7 @@ custom_fields:
   name: About This Plugin
   help_text: TRMNL X Ready
   description: Every hour, discover a new city around the world where it's exactly 5 PM.<br />A live map shows you just where to raise your glass, because <strong>it's always 5 o'clock somewhere!</strong>
-  category: travel,life
-  learn_more_url: https://wherefiveoclock.com/
+  category: life
+  github_url: https://github.com/ExcuseMi/trmnl-its5oclock-somewhere-plugin
 name: It's 5 O'Clock Somewhere
 refresh_interval: 1440

@@ -1,12 +1,12 @@
 {% template main %}
 {% if data.count > 0 %}
 {% assign rand = "now" | date: '%N' | modulo: data.count %}
-{% for city in data.cities limit:1 offset:rand %}
+{% assign city = data.cities[rand] %}
 {% capture icon %}
-  <svg class="w--6 h--6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 110">
+<svg class="w--6 h--6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 110">
   <!-- Map pin -->
   <path d="M50 4 C29 4 12 21 12 42 C12 63 50 106 50 106 C50 106 88 63 88 42 C88 21 71 4 50 4 Z"
-        fill="white" stroke="black" stroke-width="5"/>
+    fill="white" stroke="black" stroke-width="5"/>
   <!-- Clock face -->
   <circle cx="50" cy="40" r="22" fill="none" stroke="black" stroke-width="3"/>
   <!-- Hour hand at 5:00 (150° clockwise from 12) -->
@@ -47,11 +47,6 @@
 
 </style>
 
-<div id="city-data" class="hidden"
-  data-name="{{ city.name }}"
-  data-lat="{{ city.lat }}"
-  data-lon="{{ city.lon }}"
-  data-country="{{ city.country }}"></div>
 
 <!-- Map as background -->
 <div class="map-background bg--gray-50 w--full h--full">
@@ -80,7 +75,6 @@
     Where is it 5 o'clock?
   </span>
 </div>
-{% endfor %}
 {% else %}
 <div class="layout layout--center">
   <div class="text--center title--large">It's always 5 o'clock somewhere!</div>
@@ -103,7 +97,6 @@
   (function() {
     'use strict';
 
-    console.log('Map script starting...');
 
     const TILE_SIZE = 256;
     const ZOOM = 7;
@@ -286,31 +279,26 @@
 
 
     function init() {
-      const cityData = document.getElementById('city-data');
-      if (!cityData) return;
+      const lat = parseFloat({{ city.lat | json }});
+  const lon = parseFloat({{ city.lon | json }});  // Fixed: added = and opening parenthesis
+  const country = {{ city.country | json }};      // Fixed: removed extra {
+  const name = {{ city.name | json }};             // Fixed: removed extra {
 
-      const lat = parseFloat(cityData.dataset.lat);
-      const lon = parseFloat(cityData.dataset.lon);
+  if (isNaN(lat) || isNaN(lon)) return;
 
-      if (isNaN(lat) || isNaN(lon)) return;
+  const tileInfo = calculateTileInfo(lat, lon);
 
-      console.log('City:', cityData.dataset.name, { lat, lon });
+  config.centerTile = tileInfo.centerTile;
 
-      const tileInfo = calculateTileInfo(lat, lon);
-      console.log('Tile info:', tileInfo);
+  renderMap(tileInfo);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 
-      config.centerTile = tileInfo.centerTile;
-
-      renderMap(tileInfo);
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', init);
-    } else {
-      init();
-    }
-
-    window.addEventListener('load', init);
+  window.addEventListener('load', init);
   })();
 </script>
 {% endtemplate %}
