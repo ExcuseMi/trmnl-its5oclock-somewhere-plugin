@@ -212,7 +212,7 @@ for key, country_data in sorted(buckets.items()):
     capped = cap_bucket(country_data, MAX_CITIES_PER_FILE)
     total_entries += sum(len(v["c"]) for v in capped.values())
     with open(OUTPUT_DIR / f"{key}.json", "w", encoding="utf-8") as f:
-        json.dump({ 'data': capped}, f, ensure_ascii=False)
+        json.dump({"countries": capped}, f, ensure_ascii=False)
 
 print(f"  {len(buckets)} offset files written to {OUTPUT_DIR}/")
 cap_note = f"capped at {MAX_CITIES_PER_FILE} per file" if MAX_CITIES_PER_FILE else "unlimited"

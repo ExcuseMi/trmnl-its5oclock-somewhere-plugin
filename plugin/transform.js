@@ -1,5 +1,5 @@
 function transform(input) {
-  const payload = input.data;
+  const payload = input.countries;
 
   // Format: {country: {t?: toast, p?: pronunciation, c: [{n, y, x, z?, t?, p?}]}}
   if (!payload || typeof payload !== 'object' || Array.isArray(payload)) {
