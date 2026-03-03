@@ -159,7 +159,7 @@ with open(COUNTRY_INFO_FILE, encoding="utf-8") as _f:
             continue
         _parts = _line.strip().split("\t")
         if len(_parts) > 4:
-            _country_names[_parts[0]] = _parts[4]  # ISO2 -> English name
+            _country_names[_parts[0]] = _parts[4].strip()  # ISO2 -> English name
 
 # ── Build admin1 code → state name lookup ────────────────────────────────────
 # admin1CodesASCII.txt fields: "{CC}.{admin1}\tname\tasciiname\tgeonameid"
@@ -335,3 +335,16 @@ print(f"  {len(buckets)} offset files written to {OUTPUT_DIR}/")
 cap_note = f"capped at {MAX_CITIES_PER_FILE} per file" if MAX_CITIES_PER_FILE else "unlimited"
 print(f"  {total_entries} total entries ({cap_note})")
 print("Done.")
+# ── Print countries without toasts ────────────────────────────────────────────
+countries_with_toasts = set(_toast_countries.keys())
+countries_in_cities = set()
+for country_data in buckets.values():
+    countries_in_cities.update(country_data.keys())
+
+missing = countries_in_cities - countries_with_toasts
+if missing:
+    print("\nCountries without toasts:")
+    for country in sorted(missing):
+        print(f"  '{country}'")
+else:
+    print("\nAll countries have toasts.")

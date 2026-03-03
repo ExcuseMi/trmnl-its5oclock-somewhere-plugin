@@ -1,320 +1,1200 @@
 {
   "countries": {
-    "Afghanistan": {"toast": "نوش", "pronunciation": "Noosh"},
-    "Aland Islands": "Skål",
-    "Albania": {"toast": "Gëzuar", "pronunciation": "Geh-zoo-ar"},
-    "Algeria": {"toast": "في صحتك", "pronunciation": "Fee sahatak"},
-    "American Samoa": "Manuia",
-    "Andorra": "Salut",
-    "Angola": "Saúde",
+    "Afghanistan": {
+      "toast": "نوش",
+      "pronunciation": "Noosh"
+    },
+    "Aland Islands": {
+      "toast": "Skål",
+      "pronunciation": "skohl"
+    },
+    "Albania": {
+      "toast": "Gëzuar",
+      "pronunciation": "Geh-zoo-ar"
+    },
+    "Algeria": {
+      "toast": "في صحتك",
+      "pronunciation": "Fee sahatak"
+    },
+    "American Samoa": {
+      "toast": "Manuia",
+      "pronunciation": "mah-noo-ee-ah"
+    },
+    "Andorra": {
+      "toast": "Salut",
+      "pronunciation": "sah-loot"
+    },
+    "Angola": {
+      "toast": "Saúde",
+      "pronunciation": "sah-oo-dee"
+    },
+    "Anguilla": "Cheers",
     "Antigua and Barbuda": "Cheers",
-    "Argentina": "Salud",
-    "Armenia": {"toast": "Կենաց", "pronunciation": "Kents"},
-    "Aruba": "Salud",
+    "Argentina": {
+      "toast": "Salud",
+      "pronunciation": "sah-lood"
+    },
+    "Armenia": {
+      "toast": "Կենաց",
+      "pronunciation": "Kents"
+    },
+    "Aruba": {
+      "toast": "Salud",
+      "pronunciation": "sah-lood"
+    },
     "Australia": "Cheers",
-    "Austria": "Prost",
-    "Azerbaijan": {"toast": "Nuş olsun", "pronunciation": "Noosh ol-soon"},
-    "Bahrain": {"toast": "في صحتك", "pronunciation": "Fee sahatak"},
+    "Austria": {
+      "toast": "Prost",
+      "pronunciation": "prohst"
+    },
+    "Azerbaijan": {
+      "toast": "Nuş olsun",
+      "pronunciation": "Noosh ol-soon"
+    },
+    "Bahamas": "Cheers",
+    "Bahrain": {
+      "toast": "في صحتك",
+      "pronunciation": "Fee sahatak"
+    },
     "Bangladesh": "Cheers",
     "Barbados": "Cheers",
-    "Belarus": {"toast": "Будзьма", "pronunciation": "Budzma"},
-    "Belgium": ["Santé", "Proost"],
+    "Belarus": {
+      "toast": "Будзьма",
+      "pronunciation": "Budzma"
+    },
+    "Belgium": [
+      {
+        "toast": "Santé",
+        "pronunciation": "sahn-tay"
+      },
+      {
+        "toast": "Proost",
+        "pronunciation": "prohst"
+      }
+    ],
     "Belize": "Cheers",
-    "Benin": "Santé",
+    "Benin": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
     "Bermuda": "Cheers",
     "Bhutan": "Cheers",
-    "Bolivia": "Salud",
-    "Bonaire, Sint Eustatius and Saba": "Proost",
-    "Bosnia and Herzegovina": {"toast": "Živjeli", "pronunciation": "Zhiv-yeh-lee"},
+    "Bolivia": {
+      "toast": "Salud",
+      "pronunciation": "sah-lood"
+    },
+    "Bonaire, Saint Eustatius and Saba": [
+      {
+        "toast": "Proost",
+        "pronunciation": "prohst"
+      },
+      {
+        "toast": "Salud",
+        "pronunciation": "sah-lood"
+      }
+    ],
+    "Bosnia and Herzegovina": {
+      "toast": "Živjeli",
+      "pronunciation": "Zhiv-yeh-lee"
+    },
     "Botswana": "Cheers",
-    "Brazil": "Saúde",
+    "Brazil": {
+      "toast": "Saúde",
+      "pronunciation": "sah-oo-dee"
+    },
+    "British Virgin Islands": "Cheers",
     "Brunei": "Cheers",
-    "Bulgaria": {"toast": "Наздраве", "pronunciation": "Nazdrave"},
-    "Burkina Faso": "Santé",
-    "Burundi": "Santé",
-    "Cambodia": {"toast": "ជល់មួយ", "pronunciation": "Chol muoy"},
-    "Cameroon": "Santé",
+    "Bulgaria": {
+      "toast": "Наздраве",
+      "pronunciation": "Nazdrave"
+    },
+    "Burkina Faso": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
+    "Burundi": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
+    "Cambodia": {
+      "toast": "ជល់មួយ",
+      "pronunciation": "Chol muoy"
+    },
+    "Cameroon": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
     "Canada": "Cheers",
-    "Cape Verde": "Saúde",
+    "Cabo Verde": {
+      "toast": "Saúde",
+      "pronunciation": "sah-oo-dee"
+    },
     "Cayman Islands": "Cheers",
-    "Central African Republic": "Santé",
-    "Chad": {"toast": "في صحتك", "pronunciation": "Fee sahatak"},
-    "Chile": "Salud",
-    "China": {"toast": "干杯", "pronunciation": "Gān bēi"},
-    "Colombia": "Salud",
-    "Comoros": {"toast": "في صحتك", "pronunciation": "Fee sahatak"},
-    "Congo": "Santé",
-    "Costa Rica": "Salud",
-    "Croatia": {"toast": "Živjeli", "pronunciation": "Zhiv-yeh-lee"},
-    "Cuba": "Salud",
-    "Cyprus": {"toast": "Γειά μας", "pronunciation": "Yamas"},
-    "Czech Republic": {"toast": "Na zdraví", "pronunciation": "Nah zdrah-vee"},
-    "Democratic Republic of the Congo": "Santé",
-    "Denmark": "Skål",
-    "Djibouti": {"toast": "في صحتك", "pronunciation": "Fee sahatak"},
+    "Central African Republic": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
+    "Chad": {
+      "toast": "في صحتك",
+      "pronunciation": "Fee sahatak"
+    },
+    "Chile": {
+      "toast": "Salud",
+      "pronunciation": "sah-lood"
+    },
+    "China": {
+      "toast": "干杯",
+      "pronunciation": "Gān bēi"
+    },
+    "Christmas Island": "Cheers",
+    "Cocos Islands": "Cheers",
+    "Colombia": {
+      "toast": "Salud",
+      "pronunciation": "sah-lood"
+    },
+    "Comoros": {
+      "toast": "في صحتك",
+      "pronunciation": "Fee sahatak"
+    },
+    "Cook Islands": [
+      "Cheers",
+      {
+        "toast": "Kia ora",
+        "pronunciation": "kee-ah oh-rah"
+      }
+    ],
+    "Costa Rica": {
+      "toast": "Salud",
+      "pronunciation": "sah-lood"
+    },
+    "Croatia": {
+      "toast": "Živjeli",
+      "pronunciation": "Zhiv-yeh-lee"
+    },
+    "Cuba": {
+      "toast": "Salud",
+      "pronunciation": "sah-lood"
+    },
+    "Curacao": [
+      {
+        "toast": "Proost",
+        "pronunciation": "prohst"
+      },
+      {
+        "toast": "Salud",
+        "pronunciation": "sah-lood"
+      }
+    ],
+    "Cyprus": {
+      "toast": "Γειά μας",
+      "pronunciation": "Yamas"
+    },
+    "Czechia": [
+      {
+        "toast": "Na zdraví",
+        "pronunciation": "Nah zdrah-vee"
+      },
+      {
+        "toast": "Na zdar",
+        "pronunciation": "Nah zdar"
+      }
+    ],
+    "Democratic Republic of the Congo": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
+    "Denmark": {
+      "toast": "Skål",
+      "pronunciation": "skohl"
+    },
+    "Djibouti": {
+      "toast": "في صحتك",
+      "pronunciation": "Fee sahatak"
+    },
     "Dominica": "Cheers",
-    "Dominican Republic": "Salud",
-    "Ecuador": "Salud",
-    "Egypt": {"toast": "في صحتك", "pronunciation": "Fee sahatak"},
-    "El Salvador": "Salud",
-    "Equatorial Guinea": "Salud",
+    "Dominican Republic": {
+      "toast": "Salud",
+      "pronunciation": "sah-lood"
+    },
+    "Ecuador": {
+      "toast": "Salud",
+      "pronunciation": "sah-lood"
+    },
+    "Egypt": {
+      "toast": "في صحتك",
+      "pronunciation": "Fee sahatak"
+    },
+    "El Salvador": {
+      "toast": "Salud",
+      "pronunciation": "sah-lood"
+    },
+    "Equatorial Guinea": {
+      "toast": "Salud",
+      "pronunciation": "sah-lood"
+    },
     "Eritrea": "Cheers",
-    "Estonia": {"toast": "Terviseks", "pronunciation": "Tair-vi-seks"},
+    "Estonia": {
+      "toast": "Terviseks",
+      "pronunciation": "Tair-vi-seks"
+    },
     "Eswatini": "Cheers",
-    "Ethiopia": {"toast": "ለጤናዎ", "pronunciation": "Letenawo"},
-    "Faroe Islands": "Skál",
-    "Fiji Islands": "Bula",
-    "Finland": "Kippis",
-    "France": "Santé",
-    "French Polynesia": "Manuia",
-    "Gabon": "Santé",
-    "Georgia": {"toast": "გაუმარჯოს", "pronunciation": "Gaumarjos"},
-    "Germany": "Prost",
+    "Ethiopia": {
+      "toast": "ለጤናዎ",
+      "pronunciation": "Letenawo"
+    },
+    "Falkland Islands": "Cheers",
+    "Faroe Islands": {
+      "toast": "Skál",
+      "pronunciation": "skohl"
+    },
+    "Fiji": {
+      "toast": "Bula",
+      "pronunciation": "boo-lah"
+    },
+    "Finland": {
+      "toast": "Kippis",
+      "pronunciation": "kip-pis"
+    },
+    "France": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
+    "French Guiana": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
+    "French Polynesia": {
+      "toast": "Manuia",
+      "pronunciation": "mah-noo-ee-ah"
+    },
+    "French Southern Territories": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
+    "Gabon": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
+    "Gambia": "Cheers",
+    "Georgia": {
+      "toast": "გაუმარჯოს",
+      "pronunciation": "Gaumarjos"
+    },
+    "Germany": {
+      "toast": "Prost",
+      "pronunciation": "prohst"
+    },
     "Ghana": "Cheers",
-    "Greece": {"toast": "Γειά μας", "pronunciation": "Yamas"},
-    "Greenland": "Skål",
+    "Gibraltar": "Cheers",
+    "Greece": {
+      "toast": "Γειά μας",
+      "pronunciation": "Yamas"
+    },
+    "Greenland": {
+      "toast": "Skål",
+      "pronunciation": "skohl"
+    },
     "Grenada": "Cheers",
-    "Guadeloupe": "Santé",
+    "Guadeloupe": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
     "Guam": "Cheers",
-    "Guatemala": "Salud",
+    "Guatemala": {
+      "toast": "Salud",
+      "pronunciation": "sah-lood"
+    },
     "Guernsey": "Cheers",
-    "Guinea": "Santé",
-    "Guinea-Bissau": "Saúde",
+    "Guinea": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
+    "Guinea-Bissau": {
+      "toast": "Saúde",
+      "pronunciation": "sah-oo-dee"
+    },
     "Guyana": "Cheers",
-    "Haiti": "Santé",
-    "Honduras": "Salud",
-    "Hong Kong S.A.R.": {"toast": "乾杯", "pronunciation": "Gon bui"},
-    "Hungary": {"toast": "Egészségedre", "pronunciation": "Eh-gesh-shay-ged-reh"},
-    "Iceland": "Skál",
+    "Haiti": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
+    "Honduras": {
+      "toast": "Salud",
+      "pronunciation": "sah-lood"
+    },
+    "Hong Kong": [
+      {
+        "toast": "乾杯",
+        "pronunciation": "Gon bui"
+      },
+      {
+        "toast": "Yam Seng",
+        "pronunciation": "yahm seng"
+      }
+    ],
+    "Hungary": {
+      "toast": "Egészségedre",
+      "pronunciation": "Eh-gesh-shay-ged-reh"
+    },
+    "Iceland": {
+      "toast": "Skál",
+      "pronunciation": "skowl"
+    },
     "India": "Cheers",
-    "Indonesia": "Bersulang",
-    "Iran": {"toast": "نوش", "pronunciation": "Noosh"},
-    "Iraq": {"toast": "في صحتك", "pronunciation": "Fee sahatak"},
-    "Ireland": [{"toast": "Sláinte", "pronunciation": "Slawn-cheh"}, "Cheers"],
-    "Israel": {"toast": "לחיים", "pronunciation": "L'chaim"},
-    "Italy": "Cin cin",
-    "Ivory Coast": "Santé",
+    "Indonesia": {
+      "toast": "Bersulang",
+      "pronunciation": "ber-soo-lang"
+    },
+    "Iran": {
+      "toast": "نوش",
+      "pronunciation": "Noosh"
+    },
+    "Iraq": {
+      "toast": "في صحتك",
+      "pronunciation": "Fee sahatak"
+    },
+    "Ireland": [
+      {
+        "toast": "Sláinte",
+        "pronunciation": "Slawn-cheh"
+      },
+      "Cheers"
+    ],
+    "Isle of Man": "Cheers",
+    "Israel": {
+      "toast": "לחיים",
+      "pronunciation": "L'chaim"
+    },
+    "Italy": {
+      "toast": "Cin cin",
+      "pronunciation": "chin chin"
+    },
+    "Ivory Coast": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
     "Jamaica": "Cheers",
-    "Japan": {"toast": "乾杯", "pronunciation": "Kanpai"},
+    "Japan": {
+      "toast": "乾杯",
+      "pronunciation": "Kanpai"
+    },
     "Jersey": "Cheers",
-    "Jordan": {"toast": "في صحتك", "pronunciation": "Fee sahatak"},
-    "Kazakhstan": {"toast": "Ваше здоровье", "pronunciation": "Vashe zdorovye"},
-    "Kenya": "Afya",
+    "Jordan": {
+      "toast": "في صحتك",
+      "pronunciation": "Fee sahatak"
+    },
+    "Kazakhstan": {
+      "toast": "Ваше здоровье",
+      "pronunciation": "Vashe zdorovye"
+    },
+    "Kenya": {
+      "toast": "Afya",
+      "pronunciation": "ah-fyah"
+    },
     "Kiribati": "Cheers",
-    "Kosovo": {"toast": "Gëzuar", "pronunciation": "Geh-zoo-ar"},
-    "Kuwait": {"toast": "في صحتك", "pronunciation": "Fee sahatak"},
-    "Kyrgyzstan": {"toast": "Ичели", "pronunciation": "Icheli"},
-    "Laos": {"toast": "ດື່ມ", "pronunciation": "Deum"},
-    "Latvia": {"toast": "Priekā", "pronunciation": "Pree-eh-kah"},
-    "Lebanon": {"toast": "كأسك", "pronunciation": "Ka'sak"},
+    "Kosovo": {
+      "toast": "Gëzuar",
+      "pronunciation": "Geh-zoo-ar"
+    },
+    "Kuwait": {
+      "toast": "في صحتك",
+      "pronunciation": "Fee sahatak"
+    },
+    "Kyrgyzstan": {
+      "toast": "Ичели",
+      "pronunciation": "Icheli"
+    },
+    "Laos": {
+      "toast": "ດື່ມ",
+      "pronunciation": "Deum"
+    },
+    "Latvia": {
+      "toast": "Priekā",
+      "pronunciation": "Pree-eh-kah"
+    },
+    "Lebanon": {
+      "toast": "كأسك",
+      "pronunciation": "Ka'sak"
+    },
     "Lesotho": "Cheers",
     "Liberia": "Cheers",
-    "Libya": {"toast": "في صحتك", "pronunciation": "Fee sahatak"},
-    "Liechtenstein": "Prost",
-    "Lithuania": {"toast": "Į sveikatą", "pronunciation": "Eeng svey-kah-tah"},
-    "Luxembourg": "Prost",
-    "Madagascar": "Salama",
+    "Libya": {
+      "toast": "في صحتك",
+      "pronunciation": "Fee sahatak"
+    },
+    "Liechtenstein": {
+      "toast": "Prost",
+      "pronunciation": "prohst"
+    },
+    "Lithuania": {
+      "toast": "Į sveikatą",
+      "pronunciation": "Eeng svey-kah-tah"
+    },
+    "Luxembourg": {
+      "toast": "Prost",
+      "pronunciation": "prohst"
+    },
+    "Macao": {
+      "toast": "Saúde",
+      "pronunciation": "sah-oo-dee"
+    },
+    "Madagascar": {
+      "toast": "Salama",
+      "pronunciation": "sah-lah-mah"
+    },
     "Malawi": "Cheers",
-    "Malaysia": "Yam Seng",
+    "Malaysia": {
+      "toast": "Yam Seng",
+      "pronunciation": "yahm seng"
+    },
     "Maldives": "Cheers",
-    "Mali": "Santé",
-    "Malta": {"toast": "Saħħa", "pronunciation": "Sah-hah"},
-    "Man (Isle of)": "Cheers",
+    "Mali": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
+    "Malta": {
+      "toast": "Saħħa",
+      "pronunciation": "Sah-hah"
+    },
     "Marshall Islands": "Cheers",
-    "Martinique": "Santé",
-    "Mauritania": {"toast": "في صحتك", "pronunciation": "Fee sahatak"},
-    "Mauritius": "Santé",
-    "Mayotte": "Santé",
-    "Mexico": "Salud",
+    "Martinique": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
+    "Mauritania": {
+      "toast": "في صحتك",
+      "pronunciation": "Fee sahatak"
+    },
+    "Mauritius": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
+    "Mayotte": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
+    "Mexico": {
+      "toast": "Salud",
+      "pronunciation": "sah-lood"
+    },
     "Micronesia": "Cheers",
-    "Moldova": "Noroc",
-    "Monaco": "Santé",
-    "Mongolia": {"toast": "Эрүүл мэнд", "pronunciation": "Erüül mend"},
-    "Montenegro": {"toast": "Živjeli", "pronunciation": "Zhiv-yeh-lee"},
-    "Morocco": {"toast": "في صحتك", "pronunciation": "Fee sahatak"},
-    "Mozambique": "Saúde",
-    "Myanmar": "Aung bar yay",
-    "Namibia": "Prost",
+    "Moldova": {
+      "toast": "Noroc",
+      "pronunciation": "no-rok"
+    },
+    "Monaco": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
+    "Mongolia": {
+      "toast": "Эрүүл мэнд",
+      "pronunciation": "Erüül mend"
+    },
+    "Montenegro": {
+      "toast": "Živjeli",
+      "pronunciation": "Zhiv-yeh-lee"
+    },
+    "Montserrat": "Cheers",
+    "Morocco": {
+      "toast": "في صحتك",
+      "pronunciation": "Fee sahatak"
+    },
+    "Mozambique": {
+      "toast": "Saúde",
+      "pronunciation": "sah-oo-dee"
+    },
+    "Myanmar": {
+      "toast": "Aung bar yay",
+      "pronunciation": "aung ba yay"
+    },
+    "Namibia": {
+      "toast": "Prost",
+      "pronunciation": "prohst"
+    },
     "Nauru": "Cheers",
     "Nepal": "Cheers",
-    "Netherlands": "Proost",
-    "New Caledonia": "Santé",
+    "The Netherlands": [
+      {
+        "toast": "Proost",
+        "pronunciation": "prohst"
+      },
+      {
+        "toast": "Gezondheid",
+        "pronunciation": "geh-zond-hait"
+      }
+    ],
+    "New Caledonia": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
     "New Zealand": "Cheers",
-    "Nicaragua": "Salud",
-    "Niger": "Santé",
+    "Nicaragua": {
+      "toast": "Salud",
+      "pronunciation": "sah-lood"
+    },
+    "Niger": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
     "Nigeria": "Cheers",
-    "North Korea": {"toast": "위하여", "pronunciation": "Wihayeo"},
-    "North Macedonia": {"toast": "Наздравје", "pronunciation": "Nazdravye"},
-    "Norway": "Skål",
-    "Oman": {"toast": "في صحتك", "pronunciation": "Fee sahatak"},
-    "Pakistan": {"toast": "في صحتك", "pronunciation": "Fee sahatak"},
+    "Niue": "Cheers",
+    "Norfolk Island": "Cheers",
+    "North Korea": {
+      "toast": "위하여",
+      "pronunciation": "Wihayeo"
+    },
+    "North Macedonia": {
+      "toast": "Наздравје",
+      "pronunciation": "Nazdravye"
+    },
+    "Northern Mariana Islands": "Cheers",
+    "Norway": {
+      "toast": "Skål",
+      "pronunciation": "skohl"
+    },
+    "Oman": {
+      "toast": "في صحتك",
+      "pronunciation": "Fee sahatak"
+    },
+    "Pakistan": {
+      "toast": "في صحتك",
+      "pronunciation": "Fee sahatak"
+    },
     "Palau": "Cheers",
-    "Palestinian Territory Occupied": {"toast": "في صحتك", "pronunciation": "Fee sahatak"},
-    "Panama": "Salud",
+    "Palestinian Territory": [
+      {
+        "toast": "في صحتك",
+        "pronunciation": "Fee sahatak"
+      },
+      {
+        "toast": "بصحتك",
+        "pronunciation": "Bisahatik"
+      }
+    ],
+    "Panama": {
+      "toast": "Salud",
+      "pronunciation": "sah-lood"
+    },
     "Papua New Guinea": "Cheers",
-    "Paraguay": "Salud",
-    "Peru": "Salud",
-    "Philippines": "Mabuhay",
-    "Poland": {"toast": "Na zdrowie", "pronunciation": "Nah zdrov-yeh"},
-    "Portugal": "Saúde",
-    "Puerto Rico": "Salud",
-    "Qatar": {"toast": "في صحتك", "pronunciation": "Fee sahatak"},
-    "Reunion": "Santé",
-    "Romania": "Noroc",
-    "Russia": {"toast": "За здоровье", "pronunciation": "Za zdorovye"},
-    "Rwanda": "Santé",
+    "Paraguay": {
+      "toast": "Salud",
+      "pronunciation": "sah-lood"
+    },
+    "Peru": {
+      "toast": "Salud",
+      "pronunciation": "sah-lood"
+    },
+    "Philippines": {
+      "toast": "Mabuhay",
+      "pronunciation": "mah-boo-high"
+    },
+    "Pitcairn": "Cheers",
+    "Poland": {
+      "toast": "Na zdrowie",
+      "pronunciation": "Nah zdrov-yeh"
+    },
+    "Portugal": {
+      "toast": "Saúde",
+      "pronunciation": "sah-oo-dee"
+    },
+    "Puerto Rico": {
+      "toast": "Salud",
+      "pronunciation": "sah-lood"
+    },
+    "Qatar": {
+      "toast": "في صحتك",
+      "pronunciation": "Fee sahatak"
+    },
+    "Republic of the Congo": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
+    "Reunion": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
+    "Romania": {
+      "toast": "Noroc",
+      "pronunciation": "no-rok"
+    },
+    "Russia": {
+      "toast": "За здоровье",
+      "pronunciation": "Za zdorovye"
+    },
+    "Rwanda": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
+    "Saint Barthelemy": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
+    "Saint Helena": "Cheers",
     "Saint Kitts and Nevis": "Cheers",
     "Saint Lucia": "Cheers",
+    "Saint Martin": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
+    "Saint Pierre and Miquelon": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
     "Saint Vincent and the Grenadines": "Cheers",
-    "Samoa": "Manuia",
-    "San Marino": "Cin cin",
-    "Sao Tome and Principe": "Saúde",
-    "Saudi Arabia": {"toast": "في صحتك", "pronunciation": "Fee sahatak"},
-    "Senegal": "Santé",
-    "Serbia": {"toast": "Живели", "pronunciation": "Živeli"},
-    "Seychelles": "Santé",
+    "Samoa": {
+      "toast": "Manuia",
+      "pronunciation": "mah-noo-ee-ah"
+    },
+    "San Marino": {
+      "toast": "Cin cin",
+      "pronunciation": "chin chin"
+    },
+    "Sao Tome and Principe": {
+      "toast": "Saúde",
+      "pronunciation": "sah-oo-dee"
+    },
+    "Saudi Arabia": {
+      "toast": "في صحتك",
+      "pronunciation": "Fee sahatak"
+    },
+    "Senegal": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
+    "Serbia": {
+      "toast": "Живели",
+      "pronunciation": "Živeli"
+    },
+    "Seychelles": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
     "Sierra Leone": "Cheers",
-    "Singapore": "Yam Seng",
-    "Slovakia": {"toast": "Na zdravie", "pronunciation": "Nah zdrah-vyeh"},
-    "Slovenia": {"toast": "Na zdravje", "pronunciation": "Nah zdrahv-yeh"},
+    "Singapore": {
+      "toast": "Yam Seng",
+      "pronunciation": "yahm seng"
+    },
+    "Sint Maarten": [
+      "Cheers",
+      {
+        "toast": "Proost",
+        "pronunciation": "prohst"
+      }
+    ],
+    "Slovakia": {
+      "toast": "Na zdravie",
+      "pronunciation": "Nah zdrah-vyeh"
+    },
+    "Slovenia": {
+      "toast": "Na zdravje",
+      "pronunciation": "Nah zdrahv-yeh"
+    },
     "Solomon Islands": "Cheers",
-    "Somalia": {"toast": "في صحتك", "pronunciation": "Fee sahatak"},
-    "South Africa": ["Gesondheid", "Cheers"],
-    "South Korea": {"toast": "건배", "pronunciation": "Geonbae"},
+    "Somalia": {
+      "toast": "في صحتك",
+      "pronunciation": "Fee sahatak"
+    },
+    "South Africa": [
+      {
+        "toast": "Gesondheid",
+        "pronunciation": "geh-sond-hait"
+      },
+      "Cheers"
+    ],
+    "South Georgia and the South Sandwich Islands": "Cheers",
+    "South Korea": {
+      "toast": "건배",
+      "pronunciation": "Geonbae"
+    },
     "South Sudan": "Cheers",
-    "Spain": "Salud",
+    "Spain": {
+      "toast": "Salud",
+      "pronunciation": "sah-lood"
+    },
     "Sri Lanka": "Cheers",
-    "Sudan": {"toast": "في صحتك", "pronunciation": "Fee sahatak"},
-    "Suriname": "Proost",
-    "Sweden": "Skål",
-    "Switzerland": "Prost",
-    "Syria": {"toast": "في صحتك", "pronunciation": "Fee sahatak"},
-    "Taiwan": {"toast": "乾杯", "pronunciation": "Gān bēi"},
-    "Tajikistan": {"toast": "Саломатӣ", "pronunciation": "Salomati"},
-    "Tanzania": "Afya",
-    "Thailand": {"toast": "ไชโย", "pronunciation": "Chai yo"},
-    "The Bahamas": "Cheers",
-    "The Gambia": "Cheers",
-    "Timor-Leste": "Saúde",
-    "Togo": "Santé",
-    "Tonga": "Manuia",
+    "Sudan": {
+      "toast": "في صحتك",
+      "pronunciation": "Fee sahatak"
+    },
+    "Suriname": {
+      "toast": "Proost",
+      "pronunciation": "prohst"
+    },
+    "Svalbard and Jan Mayen": {
+      "toast": "Skål",
+      "pronunciation": "skohl"
+    },
+    "Sweden": {
+      "toast": "Skål",
+      "pronunciation": "skohl"
+    },
+    "Switzerland": {
+      "toast": "Prost",
+      "pronunciation": "prohst"
+    },
+    "Syria": {
+      "toast": "في صحتك",
+      "pronunciation": "Fee sahatak"
+    },
+    "Taiwan": {
+      "toast": "乾杯",
+      "pronunciation": "Gān bēi"
+    },
+    "Tajikistan": {
+      "toast": "Саломатӣ",
+      "pronunciation": "Salomati"
+    },
+    "Tanzania": {
+      "toast": "Afya",
+      "pronunciation": "ah-fyah"
+    },
+    "Thailand": {
+      "toast": "ไชโย",
+      "pronunciation": "Chai yo"
+    },
+    "Timor Leste": {
+      "toast": "Saúde",
+      "pronunciation": "sah-oo-dee"
+    },
+    "Togo": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
+    "Tonga": {
+      "toast": "Manuia",
+      "pronunciation": "mah-noo-ee-ah"
+    },
     "Trinidad and Tobago": "Cheers",
-    "Tunisia": {"toast": "في صحتك", "pronunciation": "Fee sahatak"},
-    "Turkey": {"toast": "Şerefe", "pronunciation": "Sheh-reh-feh"},
-    "Turkmenistan": "Saglyk",
+    "Tunisia": {
+      "toast": "في صحتك",
+      "pronunciation": "Fee sahatak"
+    },
+    "Turkey": {
+      "toast": "Şerefe",
+      "pronunciation": "Sheh-reh-feh"
+    },
+    "Turkmenistan": {
+      "toast": "Saglyk",
+      "pronunciation": "sahg-lyk"
+    },
+    "Turks and Caicos Islands": "Cheers",
     "Tuvalu": "Cheers",
     "Uganda": "Cheers",
-    "Ukraine": {"toast": "Будьмо", "pronunciation": "Budmo"},
-    "United Arab Emirates": {"toast": "في صحتك", "pronunciation": "Fee sahatak"},
+    "Ukraine": {
+      "toast": "Будьмо",
+      "pronunciation": "Budmo"
+    },
+    "United Arab Emirates": {
+      "toast": "في صحتك",
+      "pronunciation": "Fee sahatak"
+    },
     "United Kingdom": "Cheers",
     "United States": "Cheers",
-    "Uruguay": "Salud",
-    "Uzbekistan": "Sog'liqqa",
+    "Uruguay": {
+      "toast": "Salud",
+      "pronunciation": "sah-lood"
+    },
+    "Uzbekistan": {
+      "toast": "Sog'liqqa",
+      "pronunciation": "sog-liq-qa"
+    },
     "Vanuatu": "Cheers",
-    "Venezuela": "Salud",
-    "Vietnam": "Dô",
-    "Virgin Islands (US)": "Cheers",
-    "Wallis and Futuna Islands": "Santé",
-    "Yemen": {"toast": "في صحتك", "pronunciation": "Fee sahatak"},
+    "Vatican": [
+      {
+        "toast": "Cin cin",
+        "pronunciation": "chin chin"
+      },
+      {
+        "toast": "Salute",
+        "pronunciation": "sah-loo-teh"
+      }
+    ],
+    "Venezuela": {
+      "toast": "Salud",
+      "pronunciation": "sah-lood"
+    },
+    "Vietnam": {
+      "toast": "Dô",
+      "pronunciation": "doh"
+    },
+    "U.S. Virgin Islands": "Cheers",
+    "Wallis and Futuna": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
+    "Western Sahara": [
+      {
+        "toast": "في صحتك",
+        "pronunciation": "Fee sahatak"
+      },
+      {
+        "toast": "بصحتك",
+        "pronunciation": "Bisahatik"
+      }
+    ],
+    "Yemen": {
+      "toast": "في صحتك",
+      "pronunciation": "Fee sahatak"
+    },
     "Zambia": "Cheers",
     "Zimbabwe": "Cheers"
   },
   "states": {
-    "Barcelona, Spain": "Salut",
-    "Girona, Spain": "Salut",
-    "Lleida, Spain": "Salut",
-    "Tarragona, Spain": "Salut",
-    "Islas Baleares, Spain": "Salut",
-    "Alicante, Spain": "Salut",
-    "Castellón, Spain": "Salut",
-    "Valencia, Spain": "Salut",
-    "A Coruña, Spain": "Saúde",
-    "Lugo, Spain": "Saúde",
-    "Ourense, Spain": "Saúde",
-    "Pontevedra, Spain": "Saúde",
-    "Araba, Spain": "Topa",
-    "Bizkaia, Spain": "Topa",
-    "Gipuzkoa, Spain": "Topa",
-
-    "Geneva, Switzerland": "Santé",
-    "Vaud, Switzerland": "Santé",
-    "Neuchâtel, Switzerland": "Santé",
-    "Jura, Switzerland": "Santé",
-    "Fribourg, Switzerland": "Santé",
-    "Valais, Switzerland": "Santé",
-    "Ticino, Switzerland": "Cin cin",
-
-    "Flanders, Belgium": "Proost",
-
-    "Quebec, Canada": "Santé",
-
-    "Blaenau Gwent, United Kingdom": {"toast": "Iechyd da", "pronunciation": "Yeh-hid dah"},
-    "Bridgend, United Kingdom": {"toast": "Iechyd da", "pronunciation": "Yeh-hid dah"},
-    "Caerphilly, United Kingdom": {"toast": "Iechyd da", "pronunciation": "Yeh-hid dah"},
-    "Cardiff, United Kingdom": {"toast": "Iechyd da", "pronunciation": "Yeh-hid dah"},
-    "Carmarthenshire, United Kingdom": {"toast": "Iechyd da", "pronunciation": "Yeh-hid dah"},
-    "Ceredigion, United Kingdom": {"toast": "Iechyd da", "pronunciation": "Yeh-hid dah"},
-    "Conwy, United Kingdom": {"toast": "Iechyd da", "pronunciation": "Yeh-hid dah"},
-    "Denbighshire, United Kingdom": {"toast": "Iechyd da", "pronunciation": "Yeh-hid dah"},
-    "Flintshire, United Kingdom": {"toast": "Iechyd da", "pronunciation": "Yeh-hid dah"},
-    "Gwynedd, United Kingdom": {"toast": "Iechyd da", "pronunciation": "Yeh-hid dah"},
-    "Isle of Anglesey, United Kingdom": {"toast": "Iechyd da", "pronunciation": "Yeh-hid dah"},
-    "Merthyr Tydfil, United Kingdom": {"toast": "Iechyd da", "pronunciation": "Yeh-hid dah"},
-    "Monmouthshire, United Kingdom": {"toast": "Iechyd da", "pronunciation": "Yeh-hid dah"},
-    "Neath Port Talbot, United Kingdom": {"toast": "Iechyd da", "pronunciation": "Yeh-hid dah"},
-    "Pembrokeshire, United Kingdom": {"toast": "Iechyd da", "pronunciation": "Yeh-hid dah"},
-    "Powys, United Kingdom": {"toast": "Iechyd da", "pronunciation": "Yeh-hid dah"},
-    "Rhondda Cynon Taf, United Kingdom": {"toast": "Iechyd da", "pronunciation": "Yeh-hid dah"},
-    "Swansea, United Kingdom": {"toast": "Iechyd da", "pronunciation": "Yeh-hid dah"},
-    "Torfaen, United Kingdom": {"toast": "Iechyd da", "pronunciation": "Yeh-hid dah"},
-    "Vale of Glamorgan, United Kingdom": {"toast": "Iechyd da", "pronunciation": "Yeh-hid dah"},
-    "Wrexham, United Kingdom": {"toast": "Iechyd da", "pronunciation": "Yeh-hid dah"},
-
-    "Aberdeen, United Kingdom": {"toast": "Slàinte mhath", "pronunciation": "Slawn-juh vah"},
-    "Aberdeenshire, United Kingdom": {"toast": "Slàinte mhath", "pronunciation": "Slawn-juh vah"},
-    "Angus, United Kingdom": {"toast": "Slàinte mhath", "pronunciation": "Slawn-juh vah"},
-    "Argyll and Bute, United Kingdom": {"toast": "Slàinte mhath", "pronunciation": "Slawn-juh vah"},
-    "Clackmannanshire, United Kingdom": {"toast": "Slàinte mhath", "pronunciation": "Slawn-juh vah"},
-    "Dumfries and Galloway, United Kingdom": {"toast": "Slàinte mhath", "pronunciation": "Slawn-juh vah"},
-    "Dundee, United Kingdom": {"toast": "Slàinte mhath", "pronunciation": "Slawn-juh vah"},
-    "East Ayrshire, United Kingdom": {"toast": "Slàinte mhath", "pronunciation": "Slawn-juh vah"},
-    "East Dunbartonshire, United Kingdom": {"toast": "Slàinte mhath", "pronunciation": "Slawn-juh vah"},
-    "East Lothian, United Kingdom": {"toast": "Slàinte mhath", "pronunciation": "Slawn-juh vah"},
-    "East Renfrewshire, United Kingdom": {"toast": "Slàinte mhath", "pronunciation": "Slawn-juh vah"},
-    "Edinburgh, United Kingdom": {"toast": "Slàinte mhath", "pronunciation": "Slawn-juh vah"},
-    "Falkirk, United Kingdom": {"toast": "Slàinte mhath", "pronunciation": "Slawn-juh vah"},
-    "Fife, United Kingdom": {"toast": "Slàinte mhath", "pronunciation": "Slawn-juh vah"},
-    "Glasgow, United Kingdom": {"toast": "Slàinte mhath", "pronunciation": "Slawn-juh vah"},
-    "Highland, United Kingdom": {"toast": "Slàinte mhath", "pronunciation": "Slawn-juh vah"},
-    "Inverclyde, United Kingdom": {"toast": "Slàinte mhath", "pronunciation": "Slawn-juh vah"},
-    "Midlothian, United Kingdom": {"toast": "Slàinte mhath", "pronunciation": "Slawn-juh vah"},
-    "Moray, United Kingdom": {"toast": "Slàinte mhath", "pronunciation": "Slawn-juh vah"},
-    "North Ayrshire, United Kingdom": {"toast": "Slàinte mhath", "pronunciation": "Slawn-juh vah"},
-    "North Lanarkshire, United Kingdom": {"toast": "Slàinte mhath", "pronunciation": "Slawn-juh vah"},
-    "Orkney Islands, United Kingdom": {"toast": "Slàinte mhath", "pronunciation": "Slawn-juh vah"},
-    "Outer Hebrides, United Kingdom": {"toast": "Slàinte mhath", "pronunciation": "Slawn-juh vah"},
-    "Perth and Kinross, United Kingdom": {"toast": "Slàinte mhath", "pronunciation": "Slawn-juh vah"},
-    "Renfrewshire, United Kingdom": {"toast": "Slàinte mhath", "pronunciation": "Slawn-juh vah"},
-    "Scottish Borders, United Kingdom": {"toast": "Slàinte mhath", "pronunciation": "Slawn-juh vah"},
-    "Shetland Islands, United Kingdom": {"toast": "Slàinte mhath", "pronunciation": "Slawn-juh vah"},
-    "South Ayrshire, United Kingdom": {"toast": "Slàinte mhath", "pronunciation": "Slawn-juh vah"},
-    "South Lanarkshire, United Kingdom": {"toast": "Slàinte mhath", "pronunciation": "Slawn-juh vah"},
-    "Stirling, United Kingdom": {"toast": "Slàinte mhath", "pronunciation": "Slawn-juh vah"},
-    "West Dunbartonshire, United Kingdom": {"toast": "Slàinte mhath", "pronunciation": "Slawn-juh vah"},
-    "West Lothian, United Kingdom": {"toast": "Slàinte mhath", "pronunciation": "Slawn-juh vah"},
-
-    "Antrim and Newtownabbey, United Kingdom": {"toast": "Sláinte", "pronunciation": "Slawn-cheh"},
-    "Ards and North Down, United Kingdom": {"toast": "Sláinte", "pronunciation": "Slawn-cheh"},
-    "Armagh, Banbridge and Craigavon, United Kingdom": {"toast": "Sláinte", "pronunciation": "Slawn-cheh"},
-    "Belfast, United Kingdom": {"toast": "Sláinte", "pronunciation": "Slawn-cheh"},
-    "Causeway Coast and Glens, United Kingdom": {"toast": "Sláinte", "pronunciation": "Slawn-cheh"},
-    "Derry City and Strabane, United Kingdom": {"toast": "Sláinte", "pronunciation": "Slawn-cheh"},
-    "Fermanagh and Omagh, United Kingdom": {"toast": "Sláinte", "pronunciation": "Slawn-cheh"},
-    "Lisburn and Castlereagh, United Kingdom": {"toast": "Sláinte", "pronunciation": "Slawn-cheh"},
-    "Mid Ulster, United Kingdom": {"toast": "Sláinte", "pronunciation": "Slawn-cheh"},
-    "Mid and East Antrim, United Kingdom": {"toast": "Sláinte", "pronunciation": "Slawn-cheh"},
-    "Newry, Mourne and Down, United Kingdom": {"toast": "Sláinte", "pronunciation": "Slawn-cheh"},
-
-    "Ostrobothnia, Finland": "Skål"
+    "Barcelona, Spain": {
+      "toast": "Salut",
+      "pronunciation": "sah-loot"
+    },
+    "Girona, Spain": {
+      "toast": "Salut",
+      "pronunciation": "sah-loot"
+    },
+    "Lleida, Spain": {
+      "toast": "Salut",
+      "pronunciation": "sah-loot"
+    },
+    "Tarragona, Spain": {
+      "toast": "Salut",
+      "pronunciation": "sah-loot"
+    },
+    "Islas Baleares, Spain": {
+      "toast": "Salut",
+      "pronunciation": "sah-loot"
+    },
+    "Alicante, Spain": {
+      "toast": "Salut",
+      "pronunciation": "sah-loot"
+    },
+    "Castellón, Spain": {
+      "toast": "Salut",
+      "pronunciation": "sah-loot"
+    },
+    "Valencia, Spain": {
+      "toast": "Salut",
+      "pronunciation": "sah-loot"
+    },
+    "A Coruña, Spain": {
+      "toast": "Saúde",
+      "pronunciation": "sah-oo-deh"
+    },
+    "Lugo, Spain": {
+      "toast": "Saúde",
+      "pronunciation": "sah-oo-deh"
+    },
+    "Ourense, Spain": {
+      "toast": "Saúde",
+      "pronunciation": "sah-oo-deh"
+    },
+    "Pontevedra, Spain": {
+      "toast": "Saúde",
+      "pronunciation": "sah-oo-deh"
+    },
+    "Araba, Spain": {
+      "toast": "Topa",
+      "pronunciation": "toh-pah"
+    },
+    "Bizkaia, Spain": {
+      "toast": "Topa",
+      "pronunciation": "toh-pah"
+    },
+    "Gipuzkoa, Spain": {
+      "toast": "Topa",
+      "pronunciation": "toh-pah"
+    },
+    "Geneva, Switzerland": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
+    "Vaud, Switzerland": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
+    "Neuchâtel, Switzerland": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
+    "Jura, Switzerland": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
+    "Fribourg, Switzerland": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
+    "Valais, Switzerland": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
+    "Ticino, Switzerland": {
+      "toast": "Cin cin",
+      "pronunciation": "chin chin"
+    },
+    "Flanders, Belgium": {
+      "toast": "Proost",
+      "pronunciation": "prohst"
+    },
+    "Quebec, Canada": {
+      "toast": "Santé",
+      "pronunciation": "sahn-tay"
+    },
+    "Blaenau Gwent, United Kingdom": {
+      "toast": "Iechyd da",
+      "pronunciation": "Yeh-hid dah"
+    },
+    "Bridgend, United Kingdom": {
+      "toast": "Iechyd da",
+      "pronunciation": "Yeh-hid dah"
+    },
+    "Caerphilly, United Kingdom": {
+      "toast": "Iechyd da",
+      "pronunciation": "Yeh-hid dah"
+    },
+    "Cardiff, United Kingdom": {
+      "toast": "Iechyd da",
+      "pronunciation": "Yeh-hid dah"
+    },
+    "Carmarthenshire, United Kingdom": {
+      "toast": "Iechyd da",
+      "pronunciation": "Yeh-hid dah"
+    },
+    "Ceredigion, United Kingdom": {
+      "toast": "Iechyd da",
+      "pronunciation": "Yeh-hid dah"
+    },
+    "Conwy, United Kingdom": {
+      "toast": "Iechyd da",
+      "pronunciation": "Yeh-hid dah"
+    },
+    "Denbighshire, United Kingdom": {
+      "toast": "Iechyd da",
+      "pronunciation": "Yeh-hid dah"
+    },
+    "Flintshire, United Kingdom": {
+      "toast": "Iechyd da",
+      "pronunciation": "Yeh-hid dah"
+    },
+    "Gwynedd, United Kingdom": {
+      "toast": "Iechyd da",
+      "pronunciation": "Yeh-hid dah"
+    },
+    "Isle of Anglesey, United Kingdom": {
+      "toast": "Iechyd da",
+      "pronunciation": "Yeh-hid dah"
+    },
+    "Merthyr Tydfil, United Kingdom": {
+      "toast": "Iechyd da",
+      "pronunciation": "Yeh-hid dah"
+    },
+    "Monmouthshire, United Kingdom": {
+      "toast": "Iechyd da",
+      "pronunciation": "Yeh-hid dah"
+    },
+    "Neath Port Talbot, United Kingdom": {
+      "toast": "Iechyd da",
+      "pronunciation": "Yeh-hid dah"
+    },
+    "Pembrokeshire, United Kingdom": {
+      "toast": "Iechyd da",
+      "pronunciation": "Yeh-hid dah"
+    },
+    "Powys, United Kingdom": {
+      "toast": "Iechyd da",
+      "pronunciation": "Yeh-hid dah"
+    },
+    "Rhondda Cynon Taf, United Kingdom": {
+      "toast": "Iechyd da",
+      "pronunciation": "Yeh-hid dah"
+    },
+    "Swansea, United Kingdom": {
+      "toast": "Iechyd da",
+      "pronunciation": "Yeh-hid dah"
+    },
+    "Torfaen, United Kingdom": {
+      "toast": "Iechyd da",
+      "pronunciation": "Yeh-hid dah"
+    },
+    "Vale of Glamorgan, United Kingdom": {
+      "toast": "Iechyd da",
+      "pronunciation": "Yeh-hid dah"
+    },
+    "Wrexham, United Kingdom": {
+      "toast": "Iechyd da",
+      "pronunciation": "Yeh-hid dah"
+    },
+    "Aberdeen, United Kingdom": {
+      "toast": "Slàinte mhath",
+      "pronunciation": "Slawn-juh vah"
+    },
+    "Aberdeenshire, United Kingdom": {
+      "toast": "Slàinte mhath",
+      "pronunciation": "Slawn-juh vah"
+    },
+    "Angus, United Kingdom": {
+      "toast": "Slàinte mhath",
+      "pronunciation": "Slawn-juh vah"
+    },
+    "Argyll and Bute, United Kingdom": {
+      "toast": "Slàinte mhath",
+      "pronunciation": "Slawn-juh vah"
+    },
+    "Clackmannanshire, United Kingdom": {
+      "toast": "Slàinte mhath",
+      "pronunciation": "Slawn-juh vah"
+    },
+    "Dumfries and Galloway, United Kingdom": {
+      "toast": "Slàinte mhath",
+      "pronunciation": "Slawn-juh vah"
+    },
+    "Dundee, United Kingdom": {
+      "toast": "Slàinte mhath",
+      "pronunciation": "Slawn-juh vah"
+    },
+    "East Ayrshire, United Kingdom": {
+      "toast": "Slàinte mhath",
+      "pronunciation": "Slawn-juh vah"
+    },
+    "East Dunbartonshire, United Kingdom": {
+      "toast": "Slàinte mhath",
+      "pronunciation": "Slawn-juh vah"
+    },
+    "East Lothian, United Kingdom": {
+      "toast": "Slàinte mhath",
+      "pronunciation": "Slawn-juh vah"
+    },
+    "East Renfrewshire, United Kingdom": {
+      "toast": "Slàinte mhath",
+      "pronunciation": "Slawn-juh vah"
+    },
+    "Edinburgh, United Kingdom": {
+      "toast": "Slàinte mhath",
+      "pronunciation": "Slawn-juh vah"
+    },
+    "Falkirk, United Kingdom": {
+      "toast": "Slàinte mhath",
+      "pronunciation": "Slawn-juh vah"
+    },
+    "Fife, United Kingdom": {
+      "toast": "Slàinte mhath",
+      "pronunciation": "Slawn-juh vah"
+    },
+    "Glasgow, United Kingdom": {
+      "toast": "Slàinte mhath",
+      "pronunciation": "Slawn-juh vah"
+    },
+    "Highland, United Kingdom": {
+      "toast": "Slàinte mhath",
+      "pronunciation": "Slawn-juh vah"
+    },
+    "Inverclyde, United Kingdom": {
+      "toast": "Slàinte mhath",
+      "pronunciation": "Slawn-juh vah"
+    },
+    "Midlothian, United Kingdom": {
+      "toast": "Slàinte mhath",
+      "pronunciation": "Slawn-juh vah"
+    },
+    "Moray, United Kingdom": {
+      "toast": "Slàinte mhath",
+      "pronunciation": "Slawn-juh vah"
+    },
+    "North Ayrshire, United Kingdom": {
+      "toast": "Slàinte mhath",
+      "pronunciation": "Slawn-juh vah"
+    },
+    "North Lanarkshire, United Kingdom": {
+      "toast": "Slàinte mhath",
+      "pronunciation": "Slawn-juh vah"
+    },
+    "Orkney Islands, United Kingdom": {
+      "toast": "Slàinte mhath",
+      "pronunciation": "Slawn-juh vah"
+    },
+    "Outer Hebrides, United Kingdom": {
+      "toast": "Slàinte mhath",
+      "pronunciation": "Slawn-juh vah"
+    },
+    "Perth and Kinross, United Kingdom": {
+      "toast": "Slàinte mhath",
+      "pronunciation": "Slawn-juh vah"
+    },
+    "Renfrewshire, United Kingdom": {
+      "toast": "Slàinte mhath",
+      "pronunciation": "Slawn-juh vah"
+    },
+    "Scottish Borders, United Kingdom": {
+      "toast": "Slàinte mhath",
+      "pronunciation": "Slawn-juh vah"
+    },
+    "Shetland Islands, United Kingdom": {
+      "toast": "Slàinte mhath",
+      "pronunciation": "Slawn-juh vah"
+    },
+    "South Ayrshire, United Kingdom": {
+      "toast": "Slàinte mhath",
+      "pronunciation": "Slawn-juh vah"
+    },
+    "South Lanarkshire, United Kingdom": {
+      "toast": "Slàinte mhath",
+      "pronunciation": "Slawn-juh vah"
+    },
+    "Stirling, United Kingdom": {
+      "toast": "Slàinte mhath",
+      "pronunciation": "Slawn-juh vah"
+    },
+    "West Dunbartonshire, United Kingdom": {
+      "toast": "Slàinte mhath",
+      "pronunciation": "Slawn-juh vah"
+    },
+    "West Lothian, United Kingdom": {
+      "toast": "Slàinte mhath",
+      "pronunciation": "Slawn-juh vah"
+    },
+    "Antrim and Newtownabbey, United Kingdom": {
+      "toast": "Sláinte",
+      "pronunciation": "Slawn-cheh"
+    },
+    "Ards and North Down, United Kingdom": {
+      "toast": "Sláinte",
+      "pronunciation": "Slawn-cheh"
+    },
+    "Armagh, Banbridge and Craigavon, United Kingdom": {
+      "toast": "Sláinte",
+      "pronunciation": "Slawn-cheh"
+    },
+    "Belfast, United Kingdom": {
+      "toast": "Sláinte",
+      "pronunciation": "Slawn-cheh"
+    },
+    "Causeway Coast and Glens, United Kingdom": {
+      "toast": "Sláinte",
+      "pronunciation": "Slawn-cheh"
+    },
+    "Derry City and Strabane, United Kingdom": {
+      "toast": "Sláinte",
+      "pronunciation": "Slawn-cheh"
+    },
+    "Fermanagh and Omagh, United Kingdom": {
+      "toast": "Sláinte",
+      "pronunciation": "Slawn-cheh"
+    },
+    "Lisburn and Castlereagh, United Kingdom": {
+      "toast": "Sláinte",
+      "pronunciation": "Slawn-cheh"
+    },
+    "Mid Ulster, United Kingdom": {
+      "toast": "Sláinte",
+      "pronunciation": "Slawn-cheh"
+    },
+    "Mid and East Antrim, United Kingdom": {
+      "toast": "Sláinte",
+      "pronunciation": "Slawn-cheh"
+    },
+    "Newry, Mourne and Down, United Kingdom": {
+      "toast": "Sláinte",
+      "pronunciation": "Slawn-cheh"
+    },
+    "Ostrobothnia, Finland": {
+      "toast": "Skål",
+      "pronunciation": "skohl"
+    }
   }
 }
