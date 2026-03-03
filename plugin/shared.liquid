@@ -130,9 +130,9 @@
 {% endif %}
 {% endcapture %}
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400&family=Noto+Sans+Arabic:wght@400&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Noto+Sans+Arabic:wght@400;700&display=swap');
 
-  .instance bdi {
+  .title_bar bdi {
     font-family: 'Noto Sans', 'Noto Sans Arabic', sans-serif;
   }
 
@@ -194,7 +194,7 @@
     5 O'Clock
   </span>
   {% if city.toast and trmnl.plugin_settings.custom_fields_values.show_toast == "true" %}
-  <span class="bg--black text--white rounded p--2 {% if view >= 3 %}hidden{% endif %}" style="margin-left:auto;">
+  <span class="bg--black text--white rounded p--2 {% if view >= 3 %}hidden{% endif %}" style="margin-left:auto;font-weight:bold;color:white;background-color:black;">
     <bdi>{{ city.toast | escape }}</bdi>{% if city.pronunciation != "" %} /{{ city.pronunciation | escape }}/{% endif %}!
   </span>
   {% endif %}
@@ -421,7 +421,7 @@ function addPinToSVG(lat, lon, centerTile, offsets) {
   const scale = desiredHeight / originalHeight;
 
   // Adjustment: if icon appears too high, increase this positive value to move it down
-  const verticalAdjust = 5; // pixels after scaling
+  const verticalAdjust = 0; // pixels after scaling
 
   // Calculate translation so that the icon's bottom (approx y=125) aligns with pin,
   // plus a manual adjustment.
