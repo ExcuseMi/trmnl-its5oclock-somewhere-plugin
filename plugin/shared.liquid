@@ -50,9 +50,9 @@
 
 <!-- Map as background -->
 <div class="map-background bg--gray-50 w--full h--full">
-  <svg id="map-svg" class="image image-dither w--full h--full" viewBox="0 0 768 768" preserveAspectRatio="xMidYMid slice">
-    <g id="map-tiles"></g>
-    <g id="pin-group"></g> <!-- Pin will be added here -->
+  <svg class="map-svg image image-dither w--full h--full" viewBox="0 0 768 768" preserveAspectRatio="xMidYMid slice">
+    <g class="map-tiles"></g>
+    <g class="pin-group"></g> <!-- Pin will be added here -->
   </svg>
 </div>
 
@@ -97,6 +97,8 @@
   (function() {
     'use strict';
 
+    const root = (document.currentScript && document.currentScript.parentElement) || document;
+    const instanceId = Math.random().toString(36).slice(2, 7);
 
     const TILE_SIZE = 256;
     const ZOOM = 7;
@@ -151,9 +153,9 @@
     // safe zone between the title text (top) and the title bar (bottom).
     // Only Y is adjusted; X stays centred naturally.
     function computeSafeOffsetY(cityPosY) {
-      const svg      = document.getElementById('map-svg');
-      const titleEl  = document.querySelector('.text-container');
-      const barEl    = document.querySelector('.title_bar');
+      const svg      = root.querySelector('.map-svg');
+      const titleEl  = root.querySelector('.text-container');
+      const barEl    = root.querySelector('.title_bar');
       if (!svg || !titleEl || !barEl) return 0;
 
       const { width: screenW, height: screenH } = svg.getBoundingClientRect();
@@ -176,7 +178,7 @@
     }
 
     function renderMap(tileInfo) {
-      const mapTiles = document.getElementById('map-tiles');
+      const mapTiles = root.querySelector('.map-tiles');
       if (!mapTiles) return;
 
       mapTiles.innerHTML = '';
@@ -197,7 +199,7 @@
           const x = (dx + 1) * TILE_SIZE;
           const y = (dy + 1) * TILE_SIZE;
 
-          const patternId = `tile-${tx}-${ty}-${dx}-${dy}`;
+          const patternId = `tile-${instanceId}-${tx}-${ty}-${dx}-${dy}`;
 
           const pattern = document.createElementNS('http://www.w3.org/2000/svg', 'pattern');
           pattern.setAttribute('id', patternId);
@@ -224,10 +226,11 @@
 
           pattern.appendChild(img);
 
-          let defs = document.querySelector('#map-svg defs');
+          const mapSvg = root.querySelector('.map-svg');
+          let defs = mapSvg.querySelector('defs');
           if (!defs) {
             defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
-            document.querySelector('#map-svg').appendChild(defs);
+            mapSvg.appendChild(defs);
           }
           defs.appendChild(pattern);
 
@@ -249,7 +252,7 @@
     }
 
     function addPinToSVG(lat, lon, centerTile, offsetY) {
-      const pinGroup = document.getElementById('pin-group');
+      const pinGroup = root.querySelector('.pin-group');
       if (!pinGroup) return;
 
       pinGroup.innerHTML = '';
@@ -280,9 +283,9 @@
 
     function init() {
       const lat = parseFloat({{ city.lat | json }});
-  const lon = parseFloat({{ city.lon | json }});  // Fixed: added = and opening parenthesis
-  const country = {{ city.country | json }};      // Fixed: removed extra {
-  const name = {{ city.name | json }};             // Fixed: removed extra {
+  const lon = parseFloat({{ city.lon | json }});
+  const country = {{ city.country | json }};
+  const name = {{ city.name | json }};
 
   if (isNaN(lat) || isNaN(lon)) return;
 
