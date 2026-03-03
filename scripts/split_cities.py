@@ -85,6 +85,36 @@ def resolve_toast(name, state, country):
         return val.get("toast", ""), val.get("pronunciation", "")
     return val, ""
 
+def normalise_toast_for_json(raw):
+    """Convert a toasts.json value to (t_val, p_val) for JSON output.
+
+    raw can be a str, dict {toast, pronunciation}, or list of those.
+    t_val: str | list  — stored as "t" key
+    p_val: str         — stored as "p" key (only for single-value toasts)
+    Arrays of one item are collapsed to a single value.
+    """
+    if isinstance(raw, list):
+        opts = []
+        for item in raw:
+            if isinstance(item, dict):
+                t = item.get("toast", "")
+                p = item.get("pronunciation", "")
+                if t:
+                    opts.append({"t": t, "p": p} if p else t)
+            elif isinstance(item, str) and item:
+                opts.append(item)
+        if not opts:
+            return "", ""
+        if len(opts) == 1:
+            s = opts[0]
+            if isinstance(s, dict):
+                return s.get("t", ""), s.get("p", "")
+            return s, ""
+        return opts, ""
+    elif isinstance(raw, dict):
+        return raw.get("toast", ""), raw.get("pronunciation", "")
+    return raw or "", ""
+
 # ── Download CSV if absent ────────────────────────────────────────────────────
 if not CSV_FILE.exists():
     print(f"Downloading {CSV_FILE.name} ...")
@@ -139,13 +169,13 @@ for city in cities:
         # Store country-level toast once
         raw = _toast_countries.get(country, "")
         entry: dict = {"c": []}
-        if isinstance(raw, dict):
-            if raw.get("toast"):
-                entry["t"] = raw["toast"]
-            if raw.get("pronunciation"):
-                entry["p"] = raw["pronunciation"]
-        elif raw:
-            entry["t"] = raw
+        t_val, p_val = normalise_toast_for_json(raw)
+        if isinstance(t_val, list):
+            entry["t"] = t_val
+        elif t_val:
+            entry["t"] = t_val
+            if p_val:
+                entry["p"] = p_val
         buckets[key][country] = entry
 
     # Build city entry — embed toast only for state/city-level overrides
@@ -153,11 +183,15 @@ for city in cities:
 
     city_key  = f"{city['name']}, {country}"
     state_key = f"{city['state']}, {country}" if city["state"] else None
-    if _toast_cities.get(city_key) or (state_key and _toast_states.get(state_key)):
-        t, p = resolve_toast(city["name"], city["state"], country)
-        city_entry["t"] = t
-        if p:
-            city_entry["p"] = p
+    override  = _toast_cities.get(city_key) or (state_key and _toast_states.get(state_key))
+    if override:
+        t_val, p_val = normalise_toast_for_json(override)
+        if isinstance(t_val, list):
+            city_entry["t"] = t_val
+        elif t_val:
+            city_entry["t"] = t_val
+            if p_val:
+                city_entry["p"] = p_val
 
     zoom = ISLAND_ZOOM.get(country)
     if zoom:
