@@ -24,6 +24,15 @@ custom_fields:
   options:
   - Martini glass: glass
   - Beer mug: beer
+- keyname: map_tiles
+  field_type: select
+  name: Map style
+  optional: false
+  default: osm
+  options:
+  - OpenStreetMap: osm
+  - CartoDB Light: carto_light
+  - CartoDB Light (no labels): carto_light_no_labels
 - keyname: show_toast
   field_type: boolean
   name: Show local toast

@@ -5,7 +5,9 @@
       "Bash(python:*)",
       "Bash(py:*)",
       "WebFetch(domain:context7.com)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "WebSearch",
+      "WebFetch(domain:wiki.openstreetmap.org)"
     ]
   }
 }

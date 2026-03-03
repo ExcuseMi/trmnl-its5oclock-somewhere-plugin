@@ -41,7 +41,8 @@ function transform(input) {
     lat:      c.lat,
     lon:      c.lon,
     toast:         c.toast || '',
-    pronunciation: c.pronunciation || ''
+    pronunciation: c.pronunciation || '',
+    zoom:     c.zoom || 0
   }));
 
   return { data: { cities: result, count: result.length } };
