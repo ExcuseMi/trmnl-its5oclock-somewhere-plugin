@@ -41,6 +41,7 @@ function transform(input) {
     lat:      c.lat,
     lon:      c.lon,
     toast:    c.toast || '',
+    zoom:     c.zoom || 0,
     maps_url: 'https://www.google.com/maps?q=' + c.lat + ',' + c.lon
   }));
 

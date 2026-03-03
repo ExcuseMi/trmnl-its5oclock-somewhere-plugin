@@ -25,6 +25,25 @@ CSV_FILE   = ROOT / "cities.csv"
 OUTPUT_DIR = ROOT / "data" / "cities"
 TOASTS_FILE = ROOT / "data" / "toasts.json"
 
+# Countries where zoom 7 shows only ocean — keyed by country_name from CSV
+ISLAND_ZOOM = {
+    # Tiny atolls / < 5 km
+    "Maldives": 11, "Tuvalu": 11, "Nauru": 11, "Tokelau": 11,
+    "Saint Kitts and Nevis": 11, "Wallis and Futuna": 11,
+    # Very small islands / 5–30 km
+    "Marshall Islands": 10, "Kiribati": 10, "Micronesia": 10,
+    "Palau": 10, "Niue": 10, "Cook Islands": 10, "Tonga": 10,
+    "Barbados": 10, "Grenada": 10, "Saint Lucia": 10,
+    "Saint Vincent and the Grenadines": 10, "Antigua and Barbuda": 10,
+    "Dominica": 10, "Comoros": 10, "Seychelles": 10,
+    "São Tomé and Príncipe": 10, "Malta": 10, "Bahrain": 10,
+    "Singapore": 10,
+    # Small islands / 30–150 km
+    "Samoa": 9, "Vanuatu": 9, "Solomon Islands": 9, "Fiji": 9,
+    "Trinidad and Tobago": 9, "Mauritius": 9, "Cabo Verde": 9,
+    "Timor-Leste": 9,
+}
+
 # ── Load toasts lookup ────────────────────────────────────────────────────────
 with open(TOASTS_FILE, encoding="utf-8") as _f:
     _toasts = json.load(_f)
@@ -86,6 +105,9 @@ for city in cities:
              "lon": city["lon"], "country": city["country"]}
     if toast:
         entry["toast"] = toast
+    zoom = ISLAND_ZOOM.get(city["country"])
+    if zoom:
+        entry["zoom"] = zoom
     buckets.setdefault(key, []).append(entry)
 
 # ── Write files ───────────────────────────────────────────────────────────────

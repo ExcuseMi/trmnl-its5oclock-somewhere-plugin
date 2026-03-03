@@ -2,6 +2,13 @@
 {% if data.count > 0 %}
 {% assign rand = "now" | date: '%N' | modulo: data.count %}
 {% assign city = data.cities[rand] %}
+{% capture cheers_icon %}
+<svg class="w--6 h--6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M6 3h12l-4 8a2 2 0 01-4 0L6 3z"/>
+  <line x1="12" y1="11" x2="12" y2="19"/>
+  <line x1="8" y1="19" x2="16" y2="19"/>
+</svg>
+{% endcapture %}
 {% capture icon %}
 <svg class="w--6 h--6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 110">
   <!-- Map pin -->
@@ -60,7 +67,7 @@
 <div class="map-overlay w--full h--full flex flex--col">
   <div class="text-container text--center pt--5 pr--5 pb--0 pl--5">
     <div class="text--center {{title_class}} bg--white rounded--large">
-      {% if city.toast != '' %}<strong>{{ city.toast }}!</strong> It's 5 o'clock in{% else %}It's 5 o'clock in{% endif %} <strong>{{ city.name }}</strong>{% if city.country != '' %}, {{ city.country }}{% endif %}
+    It's 5 o'clock in <strong>{{ city.name }}</strong>{% if city.country != '' %}, {{ city.country }}{% endif %}
     </div>
   </div>
 
@@ -68,12 +75,21 @@
 
 <div class="title_bar">
   {{ icon }}
-  <span class="title {{titlebar_long_class}}">
+  <span class="title {% if view >= 3 %}hidden{% endif %}">
     It's 5 O'Clock Somewhere
   </span>
-  <span class="title hidden {{titlebar_short_class}}">
-    It's 5 O'Clock Somewhere
+  <span class="title {% if view < 3 %}hidden{% endif %}">
+    5 O'Clock
   </span>
+  {% if city.toast %}
+  <span class="instance {% if view >= 3 %}hidden{% endif %}">
+        <div class="flex flex--row gap--small flex--right flex--center-y">
+
+    {{ cheers_icon }}
+    {{ city.toast | escape }}
+        </div>
+  </span>
+  {% endif %}
 </div>
 {% else %}
 <div class="layout layout--center">
@@ -81,15 +97,12 @@
 </div>
 
 <div class="title_bar">
-
   {{ icon }}
 
-  <span class="title {{titlebar_long_class}}">
+  <span class="title">
     It's 5 O'Clock Somewhere
   </span>
-  <span class="title hidden {{titlebar_short_class}}">
-    It's 5 O'Clock Somewhere
-  </span>
+
 </div>
 {% endif %}
 
@@ -101,7 +114,7 @@
     const instanceId = Math.random().toString(36).slice(2, 7);
 
     const TILE_SIZE = 256;
-    const ZOOM = 7;
+    let ZOOM = 7;
     const VIEW_SIZE = 768;
 
     const SUBDOMAINS = ['a', 'b', 'c', 'd'];
@@ -149,32 +162,34 @@
       };
     }
 
-    // Returns the SVG-unit Y offset needed to shift the city pin into the
+    // Returns SVG-unit {x, y} offsets to place the city pin at the
+    // horizontal centre of the visible viewport and vertically in the
     // safe zone between the title text (top) and the title bar (bottom).
-    // Only Y is adjusted; X stays centred naturally.
-    function computeSafeOffsetY(cityPosY) {
-      const svg      = root.querySelector('.map-svg');
-      const titleEl  = root.querySelector('.text-container');
-      const barEl    = root.querySelector('.title_bar');
-      if (!svg || !titleEl || !barEl) return 0;
+    function computeOffsets(cityPos) {
+      // X: always centre the city horizontally regardless of aspect ratio
+      const offsetX = Math.round(VIEW_SIZE / 2 - cityPos.x);
+
+      const svg     = root.querySelector('.map-svg');
+      const titleEl = root.querySelector('.text-container');
+      const barEl   = root.querySelector('.title_bar');
+      if (!svg || !titleEl || !barEl) return { x: offsetX, y: 0 };
 
       const { width: screenW, height: screenH } = svg.getBoundingClientRect();
+      if (!screenW || !screenH) return { x: offsetX, y: 0 };
+
+      const scale = Math.max(screenW / VIEW_SIZE, screenH / VIEW_SIZE);
+      const cropY = (VIEW_SIZE - screenH / scale) / 2;
+      const pad   = 16 / scale;
+
       const titlePx = titleEl.getBoundingClientRect().height;
       const barPx   = barEl.getBoundingClientRect().height;
 
-      // Scale applied by xMidYMid slice
-      const scale = Math.max(screenW / VIEW_SIZE, screenH / VIEW_SIZE);
-
-      // SVG units cropped from top/bottom due to slice scaling
-      const cropY = (VIEW_SIZE - screenH / scale) / 2;
-
-      // Safe zone boundaries in SVG units (16 px breathing room on each side)
-      const pad        = 16 / scale;
       const topEdge    = cropY + titlePx / scale + pad;
       const bottomEdge = VIEW_SIZE - cropY - barPx / scale - pad;
+      if (topEdge >= bottomEdge) return { x: offsetX, y: 0 };
 
       const safeCenterY = (topEdge + bottomEdge) / 2;
-      return Math.round(safeCenterY - cityPosY);
+      return { x: offsetX, y: Math.round(safeCenterY - cityPos.y) };
     }
 
     function renderMap(tileInfo) {
@@ -186,11 +201,11 @@
       const centerX  = tileInfo.centerTile.x;
       const centerY  = tileInfo.centerTile.y;
       const n        = Math.pow(2, ZOOM);
-      const cityPos  = latLonToPixels(tileInfo.lat, tileInfo.lon, tileInfo.centerTile);
-      const offsetY  = computeSafeOffsetY(cityPos.y);
+      const cityPos = latLonToPixels(tileInfo.lat, tileInfo.lon, tileInfo.centerTile);
+      const offsets = computeOffsets(cityPos);
 
       for (let dy = -2; dy <= 2; dy++) {
-        for (let dx = -1; dx <= 1; dx++) {
+        for (let dx = -3; dx <= 3; dx++) {
           const tx = (centerX + dx + n) % n;
           const ty = centerY + dy;
 
@@ -246,12 +261,11 @@
         }
       }
 
-      // Shift the whole tile group and pin group by the same Y offset
-      mapTiles.setAttribute('transform', `translate(0, ${offsetY})`);
-      addPinToSVG(tileInfo.lat, tileInfo.lon, tileInfo.centerTile, offsetY);
+      mapTiles.setAttribute('transform', `translate(${offsets.x}, ${offsets.y})`);
+      addPinToSVG(tileInfo.lat, tileInfo.lon, tileInfo.centerTile, offsets);
     }
 
-    function addPinToSVG(lat, lon, centerTile, offsetY) {
+    function addPinToSVG(lat, lon, centerTile, offsets) {
       const pinGroup = root.querySelector('.pin-group');
       if (!pinGroup) return;
 
@@ -261,7 +275,7 @@
 
       const pin = document.createElementNS('http://www.w3.org/2000/svg', 'g');
       // Tip of the 18×26 pin shape is at (9, 26); place it at the city coords + shift
-      pin.setAttribute('transform', `translate(${pos.x - 9}, ${pos.y - 26 + offsetY})`);
+      pin.setAttribute('transform', `translate(${pos.x - 9 + offsets.x}, ${pos.y - 26 + offsets.y})`);
 
       const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
       path.setAttribute('d', 'M9 0C4.03 0 0 4.03 0 9c0 6.75 9 17 9 17s9-10.25 9-17C18 4.03 13.97 0 9 0z');
@@ -284,10 +298,11 @@
     function init() {
       const lat = parseFloat({{ city.lat | json }});
   const lon = parseFloat({{ city.lon | json }});
-  const country = {{ city.country | json }};
-  const name = {{ city.name | json }};
+  const cityZoom = {{ city.zoom | default: 0 | json }};
 
   if (isNaN(lat) || isNaN(lon)) return;
+
+  if (cityZoom > 0) { ZOOM = cityZoom; config.zoom = cityZoom; }
 
   const tileInfo = calculateTileInfo(lat, lon);
 
@@ -295,13 +310,11 @@
 
   renderMap(tileInfo);
   }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
+  if (document.readyState === 'complete') {
     init();
+  } else {
+    window.addEventListener('load', init);
   }
-
-  window.addEventListener('load', init);
   })();
 </script>
 {% endtemplate %}
