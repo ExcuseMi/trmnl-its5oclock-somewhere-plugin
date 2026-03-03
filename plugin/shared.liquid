@@ -193,6 +193,7 @@
     <div class="text--center {{title_class}} bg--white rounded--large">
     It's 5 o'clock in <span class="city-name lg:city-name-lg">{{ city.name }}</span>{% if city.country != '' %}, {{ city.country }}{% endif %}
     </div>
+    {% if city.island %}{{island_icon}}{% endif %}
   </div>
 
 </div>
