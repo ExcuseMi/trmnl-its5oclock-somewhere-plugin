@@ -48,7 +48,7 @@ function transform(input) {
       lon:     c.x,
       toast,
       pronunciation,
-      zoom:    c.z || 0
+      island:    c.i
     });
   }
 

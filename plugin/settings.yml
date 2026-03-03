@@ -12,7 +12,7 @@ custom_fields:
 - keyname: author_bio
   field_type: author_bio
   name: About This Plugin
-  description: Discover a new city around the world where it's exactly 5 PM.<br />A live map shows you just where to raise your glass, because <strong>it's always 5 o'clock somewhere!</strong><br /><br />glass by Leonardo Henrique Martini from <a href="https://thenounproject.com/browse/icons/term/glass/" target="_blank" title="glass Icons">Noun Project</a> (CC BY 3.0)<br />Beer by Massfoday K Toure from <a href="https://thenounproject.com/browse/icons/term/beer/" target="_blank" title="Beer Icons">Noun Project</a> (CC BY 3.0)
+  description: Discover a new city around the world where it's exactly 5 PM.<br />A live map shows you just where to raise your glass, because <strong>it's always 5 o'clock somewhere!</strong><br /><br />glass by Leonardo Henrique Martini from <a href="https://thenounproject.com/browse/icons/term/glass/" target="_blank" title="glass Icons">Noun Project</a> (CC BY 3.0)<br />Beer by Massfoday K Toure from <a href="https://thenounproject.com/browse/icons/term/beer/" target="_blank" title="Beer Icons">Noun Project</a> (CC BY 3.0)<br />island by Adrien Coquet from <a href="https://thenounproject.com/browse/icons/term/island/" target="_blank" title="island Icons">Noun Project</a> (CC BY 3.0)
   help_text: TRMNL X Ready
   category: life
   github_url: https://github.com/ExcuseMi/trmnl-its5oclock-somewhere-plugin

@@ -53,23 +53,7 @@ ADMIN1_FILE          = ROOT / "admin1CodesASCII.txt"
 MAX_CITIES_PER_FILE = 500  # Set to None to disable cap
 
 # Countries where zoom 7 shows only ocean — keyed by country_name from GeoNames
-ISLAND_ZOOM = {
-    # Tiny atolls / < 5 km
-    "Maldives": 11, "Tuvalu": 11, "Nauru": 11, "Tokelau": 11,
-    "Saint Kitts and Nevis": 11, "Wallis and Futuna Islands": 11,
-    # Very small islands / 5–30 km
-    "Marshall Islands": 10, "Kiribati": 10, "Federated States of Micronesia": 10,
-    "Palau": 10, "Niue": 10, "Cook Islands": 10, "Tonga": 10,
-    "Barbados": 10, "Grenada": 10, "Saint Lucia": 10,
-    "Saint Vincent and the Grenadines": 10, "Antigua and Barbuda": 10,
-    "Dominica": 10, "Comoros": 10, "Seychelles": 10,
-    "Sao Tome and Principe": 10, "Malta": 10, "Bahrain": 10,
-    "Singapore": 10,
-    # Small islands / 30–150 km
-    "Samoa": 9, "Vanuatu": 9, "Solomon Islands": 9, "Fiji": 9,
-    "Trinidad and Tobago": 9, "Mauritius": 9, "Cape Verde": 9,
-    "East Timor": 9,
-}
+ISLANDS = ["Maldives", "Tuvalu", "Nauru", "Tokelau", "Saint Kitts and Nevis", "Wallis and Futuna Islands", "Marshall Islands", "Kiribati", "Federated States of Micronesia", "Palau", "Niue", "Cook Islands", "Tonga", "Barbados", "Grenada", "Saint Lucia", "Saint Vincent and the Grenadines", "Antigua and Barbuda", "Dominica", "Comoros", "Seychelles", "Sao Tome and Principe", "Malta", "Bahrain", "Singapore", "Samoa", "Vanuatu", "Solomon Islands", "Fiji", "Trinidad and Tobago", "Mauritius", "Cabo Verde", "East Timor"]
 
 # ── Load name overrides ───────────────────────────────────────────────────────
 with open(NAME_OVERRIDES_FILE, encoding="utf-8") as _f:
@@ -276,9 +260,8 @@ for city in cities:
             if p_val:
                 city_entry["p"] = p_val
 
-    zoom = ISLAND_ZOOM.get(country)
-    if zoom:
-        city_entry["z"] = zoom
+    if country in ISLANDS:
+        city_entry["i"] = True
 
     buckets[key][country]["c"].append(city_entry)
 

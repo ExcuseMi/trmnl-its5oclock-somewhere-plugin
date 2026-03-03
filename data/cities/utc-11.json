@@ -1,1 +1,1 @@
-{"countries": {"American Samoa": {"c": [{"n": "Pago Pago", "y": -14.27806, "x": -170.7025}], "t": "Manuia", "p": "mah-noo-ee-ah"}, "Niue": {"c": [{"n": "Alofi", "y": -19.05294, "x": -169.91957, "z": 10}], "t": "Cheers"}}}
+{"countries": {"American Samoa": {"c": [{"n": "Pago Pago", "y": -14.27806, "x": -170.7025}], "t": "Manuia", "p": "mah-noo-ee-ah"}, "Niue": {"c": [{"n": "Alofi", "y": -19.05294, "x": -169.91957, "i": true}], "t": "Cheers"}}}
