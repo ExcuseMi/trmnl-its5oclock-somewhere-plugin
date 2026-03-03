@@ -3,7 +3,7 @@
 {% assign rand = "now" | date: '%N' | modulo: data.count %}
 {% assign city = data.cities[rand] %}
 {% capture cheers_icon %}
-<svg class="w--6 h--6 image--stroke" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<svg class="w--6 h--6 image-stroke image-stroke--small" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
   <!-- Bowl fill (behind olive) -->
   <path d="M6 3h12l-4 8a2 2 0 01-4 0L6 3z" fill="currentColor" fill-opacity="0.15" stroke="none"/>
   <!-- Glass outline drawn on top -->
@@ -13,10 +13,10 @@
 </svg>
 {% endcapture %}
 {% capture icon %}
-<svg class="w--6 h--6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 110">
+  <svg class="w--6 h--6 image-stroke image-stroke--small" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 110">
   <!-- Map pin -->
   <path d="M50 4 C29 4 12 21 12 42 C12 63 50 106 50 106 C50 106 88 63 88 42 C88 21 71 4 50 4 Z"
-    fill="white" stroke="black" stroke-width="5"/>
+        fill="white" stroke="black" stroke-width="5"/>
   <!-- Clock face -->
   <circle cx="50" cy="40" r="22" fill="none" stroke="black" stroke-width="3"/>
   <!-- Hour hand at 5:00 (150° clockwise from 12) -->
@@ -25,7 +25,7 @@
   <line x1="50" y1="40" x2="50" y2="21" stroke="black" stroke-width="3" stroke-linecap="round"/>
   <!-- Centre pivot -->
   <circle cx="50" cy="40" r="3" fill="black"/>
-</svg>
+</svg></svg>
 {% endcapture %}
 <style>
   .map-background {
@@ -78,18 +78,18 @@
 
 <div class="title_bar">
   {{ icon }}
-  <span class="title {% if view >= 3 %}hidden{% endif %}">
+  <span class="title text--stroke {% if view >= 3 %}hidden{% endif %}">
     It's 5 O'Clock Somewhere
   </span>
-  <span class="title {% if view < 3 %}hidden{% endif %}">
+  <span class="title text--stroke {% if view < 3 %}hidden{% endif %}">
     5 O'Clock
   </span>
   {% if city.toast and trmnl.plugin_settings.custom_fields_values.show_toast == "true" %}
-  <span class="instance {% if view >= 3 %}hidden{% endif %}">
-        <div class="flex flex--row gap--small flex--right flex--center-y">
+  <span class="instance text--stroke {% if view >= 3 %}hidden{% endif %}">
+        <div class="flex flex--row gap--small flex--right flex--center-y text--stroke">
 
     {{ cheers_icon }}
-    {{ city.toast | escape }}
+    {{ city.toast | escape }}!
         </div>
   </span>
   {% endif %}
@@ -102,7 +102,7 @@
 <div class="title_bar">
   {{ icon }}
 
-  <span class="title">
+  <span class="title text--stroke">
     It's 5 O'Clock Somewhere
   </span>
 
