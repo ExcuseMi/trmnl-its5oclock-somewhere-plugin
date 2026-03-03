@@ -52,12 +52,15 @@ _toast_states    = _toasts.get("states", {})
 _toast_cities    = _toasts.get("cities", {})
 
 def resolve_toast(name, state, country):
-    return (
+    val = (
         _toast_cities.get(f"{name}, {country}")
         or _toast_states.get(f"{state}, {country}")
         or _toast_countries.get(country)
         or ""
     )
+    if isinstance(val, dict):
+        return val.get("toast", ""), val.get("pronunciation", "")
+    return val, ""
 
 # ── Download CSV if absent ────────────────────────────────────────────────────
 if not CSV_FILE.exists():
@@ -100,11 +103,13 @@ for city in cities:
     sign      = "+" if offset_hours >= 0 else ""
     hours_str = f"{offset_hours:.1f}".rstrip("0").rstrip(".")
     key       = f"utc{sign}{hours_str}"
-    toast = resolve_toast(city["name"], city["state"], city["country"])
+    toast, pronunciation = resolve_toast(city["name"], city["state"], city["country"])
     entry = {"name": city["name"], "lat": city["lat"],
              "lon": city["lon"], "country": city["country"]}
     if toast:
         entry["toast"] = toast
+    if pronunciation:
+        entry["pronunciation"] = pronunciation
     zoom = ISLAND_ZOOM.get(city["country"])
     if zoom:
         entry["zoom"] = zoom
