@@ -7,8 +7,98 @@ watch:
   - src
 
 # values of custom fields (defined in src/settings.yml)
-custom_fields: {}
+custom_fields:
+  pin_icon: beer
+  show_toast: "true"
 
 # override variables
 variables:
-  trmnl: {}
+  trmnl:
+    user:
+      id: 6458
+      name: Excuse Me
+      first_name: Excuse
+      last_name: Me
+      locale: nl
+      time_zone: Brussels
+      time_zone_iana: Europe/Brussels
+      utc_offset: 3600
+    device:
+      friendly_id: GTDC87
+      percent_charged: 100.0
+      wifi_strength: 100
+      height: null
+      width: null
+    system:
+      timestamp_utc: 1772625328
+    plugin_settings:
+      instance_name: "It's 5 O'Clock Somewhere"
+      strategy: polling
+      dark_mode: "no"
+      no_screen_padding: "no"
+      polling_headers: ""
+      custom_fields_values: {}
+  data:
+    count: 10
+    cities:
+      - lat: 0.32779
+        lon: -79.47407
+        name: Rosa Zarate
+        toast: Salud
+        country: Ecuador
+        pronunciation: sah-lood
+      - lat: -4.57722
+        lon: -81.27194
+        name: Talara
+        toast: Salud
+        country: Peru
+        pronunciation: sah-lood
+      - lat: 21.46122
+        lon: -71.14188
+        name: Cockburn Town
+        toast: Cheers
+        country: Turks and Caicos Islands
+        pronunciation: ""
+      - lat: 45.40008
+        lon: -72.73243
+        name: Granby
+        toast: "Santé"
+        country: Canada
+        pronunciation: sahn-tay
+      - lat: 19.2866
+        lon: -81.37436
+        name: George Town
+        toast: Cheers
+        country: Cayman Islands
+        pronunciation: ""
+      - lat: 19.5775
+        lon: -88.04529
+        name: Felipe Carrillo Puerto
+        toast: Salud
+        country: Mexico
+        pronunciation: sah-lood
+      - lat: 25.05823
+        lon: -77.34306
+        name: Nassau
+        toast: Cheers
+        country: Bahamas
+        pronunciation: ""
+      - lat: -4.37555
+        lon: -70.03179
+        name: Benjamin Constant
+        toast: "Saúde"
+        country: Brazil
+        pronunciation: sah-oo-dee
+      - lat: 9.05032
+        lon: -79.47068
+        name: San Miguelito
+        toast: Salud
+        country: Panama
+        pronunciation: sah-lood
+      - lat: 18.47116
+        lon: -77.91883
+        name: Montego Bay
+        toast: Cheers
+        country: Jamaica
+        pronunciation: ""
+

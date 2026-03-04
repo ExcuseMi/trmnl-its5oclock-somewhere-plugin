@@ -12,60 +12,18 @@
   </span>
   {% endif %}
 {% endtemplate %}
+{% template main_title %}
+  <div class="text-container text--center {{text_container_class}} pr--5 pb--0 pl--5">
+    <div class="text--center {{title_class}} bg--white rounded--large">
+    {% if city %}
+    It's 5 o'clock in <strong>{{ city.name }}</strong>{% if city.country != '' %}, {{ city.country }}{% endif %}
+    {% else %}
+    While I don't have any data to support this claim,<br /><strong>it's definitely 5 o'clock somewhere!</strong>
+    {% endif %}
+    </div>
+{% endtemplate %}
+
 {% template main %}
-
-{% if data.count > 0 %}
-{% assign rand = "now" | date: '%N' | modulo: data.count %}
-{% assign city = data.cities[rand] %}
-
-{% capture cheers_icon %}
-{% if trmnl.plugin_settings.custom_fields_values.pin_icon == "beer" %}
-<svg class="image w--7 h--7" viewBox="0 0 100 125" xmlns="http://www.w3.org/2000/svg">
-  <g transform="matrix(1.2786967,0,0,1.2064459,-13.935252,-0.40893502)">
-    <g>
-      <path
-         d="m 78.035,39.585 h -5.292 v -3.626 c 3.878,-0.862 6.704,-4.316 6.704,-8.38 0,-4.738 -3.86,-8.593 -8.604,-8.593 -0.573,0 -1.125,0.053 -1.648,0.159 -1.588,-2.425 -4.284,-3.901 -7.213,-3.901 -0.275,0 -0.542,0.011 -0.802,0.034 C 60.691,9.92 56.177,5.709 50.7,5.709 c -2.858,0 -5.515,1.113 -7.466,3.093 -1.979,-2.413 -4.925,-3.82 -8.111,-3.82 -5.809,0 -10.534,4.726 -10.534,10.535 0,0.496 0.033,0.976 0.101,1.448 -5.12,0.457 -9.147,4.775 -9.147,10.017 0,4.25 2.692,8.03 6.628,9.449 v 44.57 7.593 c 0,3.542 2.882,6.423 6.424,6.423 h 37.726 c 3.542,0 6.424,-2.881 6.424,-6.423 V 81.001 73.8 h 5.292 c 3.542,0 6.423,-2.881 6.423,-6.423 V 46.008 C 84.458,42.466 81.577,39.585 78.035,39.585 Z M 59.231,51.04 c -0.553,0 -1,0.447 -1,1 V 80.002 H 48.344 V 52.04 c 0,-0.553 -0.447,-1 -1,-1 -0.553,0 -1,0.447 -1,1 V 80.002 H 35.151 V 52.04 c 0,-0.553 -0.447,-1 -1,-1 -0.553,0 -1,0.447 -1,1 V 80.002 H 24.17 v -43.07 c 0.008,10e-4 0.017,10e-4 0.025,0.002 0.456,0.063 0.922,0.095 1.394,0.095 2.895,0 5.573,-1.21 7.46,-3.308 2.169,4.464 6.709,7.354 11.805,7.354 4.187,0 8.105,-2.018 10.554,-5.352 1.617,1.919 4.021,3.063 6.574,3.063 2.487,0 4.853,-1.088 6.467,-2.945 0.372,0.111 0.755,0.194 1.147,0.251 0.126,0.018 0.258,0.018 0.387,0.03 0.252,0.025 0.503,0.057 0.761,0.06 V 40.585 72.8 80.001 H 60.231 V 52.04 c 0,-0.553 -0.447,-1 -1,-1 z M 17.542,26.982 c 0,-4.443 3.609,-8.057 8.047,-8.057 0.045,0 0.089,-0.003 0.131,0.002 0.339,0.066 0.691,-0.047 0.928,-0.301 0.235,-0.254 0.323,-0.613 0.23,-0.948 -0.194,-0.7 -0.289,-1.407 -0.289,-2.162 0,-4.706 3.828,-8.535 8.534,-8.535 2.942,0 5.631,1.48 7.192,3.958 0.174,0.277 0.474,0.452 0.801,0.466 0.322,0.003 0.64,-0.132 0.84,-0.392 1.605,-2.102 4.064,-3.307 6.744,-3.307 4.7,0 8.523,3.829 8.526,8.578 -0.056,0.332 0.061,0.669 0.309,0.898 0.247,0.229 0.595,0.317 0.92,0.235 0.476,-0.119 0.976,-0.176 1.526,-0.176 2.454,0 4.696,1.351 5.853,3.526 0.228,0.429 0.732,0.632 1.19,0.482 0.548,-0.177 1.159,-0.267 1.818,-0.267 3.642,0 6.604,2.958 6.604,6.593 0,3.351 -2.501,6.164 -5.851,6.549 -1.058,0.157 -2.169,-0.006 -3.108,-0.392 -0.425,-0.173 -0.917,-0.036 -1.189,0.339 -1.228,1.697 -3.216,2.71 -5.317,2.71 -2.367,0 -4.565,-1.282 -5.737,-3.345 -0.178,-0.312 -0.51,-0.506 -0.869,-0.506 0,0 0,0 -10e-4,0 -0.359,0 -0.691,0.194 -0.869,0.507 -1.968,3.474 -5.666,5.632 -9.651,5.632 -4.851,0 -9.106,-3.086 -10.59,-7.681 -0.119,-0.372 -0.445,-0.64 -0.833,-0.686 -0.039,-0.004 -0.079,-0.007 -0.118,-0.007 -0.035,0 -0.068,0.01 -0.102,0.013 -0.034,0.004 -0.068,0.006 -0.102,0.013 -0.057,0.012 -0.111,0.031 -0.165,0.053 -0.03,0.012 -0.06,0.021 -0.088,0.035 -0.055,0.028 -0.104,0.064 -0.152,0.102 -0.023,0.018 -0.048,0.031 -0.069,0.051 -0.066,0.061 -0.126,0.131 -0.174,0.21 -1.478,2.411 -4.046,3.85 -6.871,3.85 -0.747,0 -1.47,-0.097 -2.153,-0.289 -3.472,-0.95 -5.895,-4.14 -5.895,-7.751 z m 53.201,61.612 c 0,2.438 -1.984,4.423 -4.424,4.423 H 28.593 c -2.439,0 -4.424,-1.984 -4.424,-4.423 v -6.593 h 46.573 v 6.593 z M 82.458,67.377 c 0,2.438 -1.984,4.423 -4.423,4.423 H 72.743 V 41.585 h 5.292 c 2.438,0 4.423,1.984 4.423,4.423 z"
-         id="path1"
-         fill="white"
-         stroke="black"
-         stroke-width="3.5" />
-    </g>
-  </g>
-  <path
-     style="fill:#ffffff;stroke-width:3"
-     d="m 39.457083,45.95374 c -4.006101,-1.181261 -6.598529,-3.288367 -8.59817,-6.988532 -1.595848,-2.952982 -2.362745,-3.156145 -4.121095,-1.091744 -4.708741,5.528321 -13.563056,4.719295 -16.8697312,-1.5414 -3.106981,-5.882607 0.9007642,-12.755247 7.9437162,-13.622202 2.744082,-0.337785 2.91676,-0.552183 2.646226,-3.28558 C 19.4786,9.5284395 32.560401,4.3177968 39.19768,11.960048 c 0.786451,0.905532 1.679808,1.64642 1.985235,1.64642 0.305428,0 1.308931,-0.650225 2.23001,-1.444944 2.324802,-2.005873 4.014555,-2.7345215 6.83716,-2.9482911 2.648443,-0.2005795 5.061681,0.5478219 7.55712,2.3436391 1.539503,1.107888 3.719661,5.064486 3.719661,6.750526 0,2.221558 0.229718,2.400209 3.086325,2.400209 3.194247,0 5.582276,0.983978 7.122452,2.934776 1.472027,1.864481 1.447815,1.855029 4.214641,1.645484 1.957558,-0.148256 2.769713,-0.03248 4.017282,0.572683 6.504811,3.155306 6.501523,10.833837 -0.006,13.990359 -1.330839,0.645536 -2.015025,0.725868 -4.496556,0.527954 l -2.926876,-0.233431 -1.745727,1.449822 c -3.808214,3.162719 -8.852573,2.715991 -12.026573,-1.065072 -1.434846,-1.709278 -2.096326,-1.859985 -3.085728,-0.70303 -2.037608,2.382676 -3.604439,3.87139 -4.846466,4.604843 -3.32627,1.96425 -7.831929,2.566935 -11.376571,1.521745 z"
-     id="path2" />
-  <path
-     style="fill:#ffffff;stroke-width:3"
-     d="M 17.16,70.04 V 44.25 l 2.08,-0 c 2.84,-0 4.64,-0.53 7.1,-2.1 1.21,-0.77 2.15,-1.15 2.24,-0.91 0.38,1.07 3.35,4.13 5.04,5.18 3.19,1.99 5.9,2.76 9.69,2.75 5.04,-0.01 9.19,-1.63 12.43,-4.87 l 1.14,-1.14 1.43,1.08 c 3.96,2.99 10.03,2.97 14.02,-0.05 1.2,-0.91 1.73,-1.09 2.67,-0.89 l 1.18,0.24 v 26.13 26.13 H 69.65 63.12 L 63.02,78.54 62.91,61.26 h -1.19 -1.19 l -0.1,17.29 -0.1,17.29 h -6.13 -6.13 L 47.96,78.54 47.86,61.26 H 46.67 45.48 L 45.38,78.54 45.28,95.83 H 38.16 31.03 L 30.93,78.54 30.83,61.26 29.88,61.13 c -0.52,-0.07 -1.1,0.1 -1.28,0.37 -0.18,0.27 -0.34,8.11 -0.34,17.41 l -0.01,16.91 H 22.71 17.16 Z"
-     id="path3" />
-  <path
-     style="fill:#ffffff;stroke-width:3"
-     d="m 20.725826,111.26347 c -0.923789,-0.31861 -2.395045,-1.68829 -3.008587,-2.80088 -0.384117,-0.69654 -0.556553,-2.34664 -0.556553,-5.32585 v -4.316617 h 29.511432 29.511433 v 4.503487 c 0,5.07402 -0.39768,6.26489 -2.495024,7.47146 -1.224586,0.70448 -2.146488,0.72859 -26.818345,0.70145 -14.052592,-0.0155 -25.817551,-0.12033 -26.144356,-0.23305 z"
-     id="path4" />
-  <path
-     style="fill:#ffffff;stroke-width:3"
-     d="M 79.352563,67.986235 V 49.859646 l 3.664172,5.81e-4 c 4.248939,6.73e-4 5.910064,0.58554 7.320446,2.577462 0.895644,1.264945 0.899181,1.326086 0.899181,15.548546 0,14.222458 -0.0036,14.2836 -0.899181,15.548545 -1.410382,1.991922 -3.071507,2.576789 -7.320446,2.577463 l -3.664172,5.8e-4 z"
-     id="path5" />
-</svg>
-{% else %}
-<svg class="image w--7 h--7" viewBox="-5.0 -10.0 110.0 135.0" xmlns="http://www.w3.org/2000/svg">
-  <path
-     d="M 56.497031,53.693647 95.47469,0.72300883 c 1.2543,-1.7110822 1.442805,-3.98036153 0.485774,-5.88005833 C 95.003413,-7.049322 93.06034,-8.2457506 90.936057,-8.2457506 H 5.2520261 c -2.1242816,0 -4.0674109,1.1962986 -5.02440536,3.0887011 -0.95703155,1.8995112 -0.76852829,4.16893907 0.49302964,5.88005833 L 39.698309,53.693647 c 1.094791,1.486311 1.689329,3.284332 1.682072,5.133173 v 43.71252 c 0.0073,1.66031 -1.000538,3.15384 -2.54487,3.76282 l -16.538035,6.66296 -0.340757,0.18125 c -1.979323,1.31957 -2.86393,3.78473 -2.17514,6.06122 0.688773,2.27666 2.791359,3.84264 5.169553,3.84264 h 46.286897 c 2.378008,-0.007 4.48076,-1.56607 5.169551,-3.84264 0.688772,-2.27667 -0.19576,-4.74173 -2.175139,-6.06122 L 57.35363,106.30208 c -1.537055,-0.60901 -2.54487,-2.10256 -2.54487,-3.76283 V 58.826737 c 0,-1.848821 0.587282,-3.646823 1.68933,-5.133172 z m -0.565529,56.138963 16.320503,6.57609 c 0.522022,0.42777 0.717783,1.1383 0.485772,1.77632 -0.224751,0.63803 -0.82653,1.05854 -1.500806,1.05854 H 24.950073 c -0.674276,0 -1.276055,-0.42051 -1.508064,-1.05854 -0.224753,-0.63802 -0.029,-1.34855 0.493012,-1.77632 l 16.327741,-6.57609 h -0.0073 c 2.987173,-1.18904 4.93754,-4.08189 4.930117,-7.29383 V 58.826262 c 0,-2.660874 -0.848284,-5.249177 -2.428866,-7.388122 L 3.779105,-1.5324984 C 3.3730872,-2.0835311 3.3078277,-2.8230487 3.6195993,-3.4392483 3.9313655,-4.0555222 4.5621348,-4.4397864 5.2509254,-4.4397864 H 90.934956 c 0.688773,0 1.319561,0.3842642 1.631328,1.0005381 0.311764,0.6162738 0.253762,1.3558099 -0.159508,1.9067499 L 53.429118,51.43814 c -1.580563,2.13876 -2.428865,4.727248 -2.421626,7.388122 v 43.712518 c -0.0073,3.21194 1.943129,6.10483 4.922878,7.29383 z"
-     id="path1"
-     style="stroke-width:1.85607" />
-  <path
-     d="M 52.807146,47.559306 75.087519,17.672723 H 21.10903 l 22.280371,29.886583 c 1.109304,1.486311 2.849452,2.363531 4.705531,2.363531 1.856079,0 3.603393,-0.877294 4.712771,-2.363531 z"
-     id="path2"
-     style="stroke-width:1.85607" />
-  <path
-     style="fill:#ffffff;stroke-width:0.167286"
-     d="m 29.358736,129.01472 c -0.616539,-0.30806 -1.018156,-1.20033 -0.809585,-1.79864 0.09152,-0.26253 0.254656,-0.54618 0.362528,-0.63033 0.107869,-0.0842 3.80951,-1.60195 8.225867,-3.37289 4.416357,-1.77095 8.479131,-3.4567 9.028385,-3.74612 1.972131,-1.03918 3.509291,-3.14197 3.931028,-5.37752 0.136772,-0.72501 0.175406,-7.43734 0.139132,-24.172863 -0.05632,-25.984536 0.03946,-24.006196 -1.290423,-26.65341 C 48.562275,62.49978 40.938174,51.994372 28.546518,35.15453 17.663696,20.365143 8.6837149,8.04714 8.5910041,7.7811897 8.3512676,7.0934811 8.8257976,6.1406932 9.5610452,5.8334872 10.028295,5.6382577 16.860814,5.608858 53.374941,5.6449601 l 43.260319,0.042772 0.488133,0.5463195 c 1.054559,1.1802676 1.84739,-0.057939 -12.075469,18.8588854 -27.902324,37.910554 -27.258036,37.02341 -27.92456,38.450375 -1.22446,2.621454 -1.166115,1.265499 -1.166115,27.10116 0,22.721608 0.0063,23.179108 0.336123,24.246818 0.406894,1.31736 1.448508,2.92418 2.402164,3.70563 1.020242,0.83602 1.870805,1.21379 10.560969,4.69057 4.359585,1.74419 7.99288,3.29217 8.155205,3.47455 0.330106,0.3709 0.382777,1.14936 0.112,1.65531 -0.44846,0.83796 0.355409,0.81145 -24.530419,0.80881 -18.226099,-0.002 -23.306232,-0.0474 -23.634555,-0.21144 z M 55.640783,59.424676 c 0.496083,-0.243443 1.180727,-0.71432 1.52143,-1.046394 0.549686,-0.535762 23.051541,-30.581956 23.051541,-30.780177 0,-0.04374 -12.195167,-0.07952 -27.100371,-0.07952 -14.905205,0 -27.100372,0.04552 -27.100372,0.101157 0,0.08799 5.33664,7.27247 19.249874,25.915245 3.797498,5.088388 4.234751,5.543617 5.893222,6.135504 1.277352,0.455872 3.278288,0.346196 4.484676,-0.245817 z"
-     id="path3"
-     transform="translate(-5,-10)" />
-</svg>
-{% endif %}
-{% endcapture %}
 {% capture icon %}
 {% if trmnl.plugin_settings.custom_fields_values.pin_icon == "beer" %}
 <svg class="image w--8 h--8 image--stroke" viewBox="0 0 100 125" xmlns="http://www.w3.org/2000/svg">
@@ -144,20 +102,73 @@
 
 {% endif %}
 {% endcapture %}
+
+{% capture cheers_icon %}
+{% if trmnl.plugin_settings.custom_fields_values.pin_icon == "beer" %}
+<svg class="image w--7 h--7" viewBox="0 0 100 125" xmlns="http://www.w3.org/2000/svg">
+  <g transform="matrix(1.2786967,0,0,1.2064459,-13.935252,-0.40893502)">
+    <g>
+      <path
+         d="m 78.035,39.585 h -5.292 v -3.626 c 3.878,-0.862 6.704,-4.316 6.704,-8.38 0,-4.738 -3.86,-8.593 -8.604,-8.593 -0.573,0 -1.125,0.053 -1.648,0.159 -1.588,-2.425 -4.284,-3.901 -7.213,-3.901 -0.275,0 -0.542,0.011 -0.802,0.034 C 60.691,9.92 56.177,5.709 50.7,5.709 c -2.858,0 -5.515,1.113 -7.466,3.093 -1.979,-2.413 -4.925,-3.82 -8.111,-3.82 -5.809,0 -10.534,4.726 -10.534,10.535 0,0.496 0.033,0.976 0.101,1.448 -5.12,0.457 -9.147,4.775 -9.147,10.017 0,4.25 2.692,8.03 6.628,9.449 v 44.57 7.593 c 0,3.542 2.882,6.423 6.424,6.423 h 37.726 c 3.542,0 6.424,-2.881 6.424,-6.423 V 81.001 73.8 h 5.292 c 3.542,0 6.423,-2.881 6.423,-6.423 V 46.008 C 84.458,42.466 81.577,39.585 78.035,39.585 Z M 59.231,51.04 c -0.553,0 -1,0.447 -1,1 V 80.002 H 48.344 V 52.04 c 0,-0.553 -0.447,-1 -1,-1 -0.553,0 -1,0.447 -1,1 V 80.002 H 35.151 V 52.04 c 0,-0.553 -0.447,-1 -1,-1 -0.553,0 -1,0.447 -1,1 V 80.002 H 24.17 v -43.07 c 0.008,10e-4 0.017,10e-4 0.025,0.002 0.456,0.063 0.922,0.095 1.394,0.095 2.895,0 5.573,-1.21 7.46,-3.308 2.169,4.464 6.709,7.354 11.805,7.354 4.187,0 8.105,-2.018 10.554,-5.352 1.617,1.919 4.021,3.063 6.574,3.063 2.487,0 4.853,-1.088 6.467,-2.945 0.372,0.111 0.755,0.194 1.147,0.251 0.126,0.018 0.258,0.018 0.387,0.03 0.252,0.025 0.503,0.057 0.761,0.06 V 40.585 72.8 80.001 H 60.231 V 52.04 c 0,-0.553 -0.447,-1 -1,-1 z M 17.542,26.982 c 0,-4.443 3.609,-8.057 8.047,-8.057 0.045,0 0.089,-0.003 0.131,0.002 0.339,0.066 0.691,-0.047 0.928,-0.301 0.235,-0.254 0.323,-0.613 0.23,-0.948 -0.194,-0.7 -0.289,-1.407 -0.289,-2.162 0,-4.706 3.828,-8.535 8.534,-8.535 2.942,0 5.631,1.48 7.192,3.958 0.174,0.277 0.474,0.452 0.801,0.466 0.322,0.003 0.64,-0.132 0.84,-0.392 1.605,-2.102 4.064,-3.307 6.744,-3.307 4.7,0 8.523,3.829 8.526,8.578 -0.056,0.332 0.061,0.669 0.309,0.898 0.247,0.229 0.595,0.317 0.92,0.235 0.476,-0.119 0.976,-0.176 1.526,-0.176 2.454,0 4.696,1.351 5.853,3.526 0.228,0.429 0.732,0.632 1.19,0.482 0.548,-0.177 1.159,-0.267 1.818,-0.267 3.642,0 6.604,2.958 6.604,6.593 0,3.351 -2.501,6.164 -5.851,6.549 -1.058,0.157 -2.169,-0.006 -3.108,-0.392 -0.425,-0.173 -0.917,-0.036 -1.189,0.339 -1.228,1.697 -3.216,2.71 -5.317,2.71 -2.367,0 -4.565,-1.282 -5.737,-3.345 -0.178,-0.312 -0.51,-0.506 -0.869,-0.506 0,0 0,0 -10e-4,0 -0.359,0 -0.691,0.194 -0.869,0.507 -1.968,3.474 -5.666,5.632 -9.651,5.632 -4.851,0 -9.106,-3.086 -10.59,-7.681 -0.119,-0.372 -0.445,-0.64 -0.833,-0.686 -0.039,-0.004 -0.079,-0.007 -0.118,-0.007 -0.035,0 -0.068,0.01 -0.102,0.013 -0.034,0.004 -0.068,0.006 -0.102,0.013 -0.057,0.012 -0.111,0.031 -0.165,0.053 -0.03,0.012 -0.06,0.021 -0.088,0.035 -0.055,0.028 -0.104,0.064 -0.152,0.102 -0.023,0.018 -0.048,0.031 -0.069,0.051 -0.066,0.061 -0.126,0.131 -0.174,0.21 -1.478,2.411 -4.046,3.85 -6.871,3.85 -0.747,0 -1.47,-0.097 -2.153,-0.289 -3.472,-0.95 -5.895,-4.14 -5.895,-7.751 z m 53.201,61.612 c 0,2.438 -1.984,4.423 -4.424,4.423 H 28.593 c -2.439,0 -4.424,-1.984 -4.424,-4.423 v -6.593 h 46.573 v 6.593 z M 82.458,67.377 c 0,2.438 -1.984,4.423 -4.423,4.423 H 72.743 V 41.585 h 5.292 c 2.438,0 4.423,1.984 4.423,4.423 z"
+         id="path1"
+         fill="white"
+         stroke="black"
+         stroke-width="3.5" />
+    </g>
+  </g>
+  <path
+     style="fill:#ffffff;stroke-width:3"
+     d="m 39.457083,45.95374 c -4.006101,-1.181261 -6.598529,-3.288367 -8.59817,-6.988532 -1.595848,-2.952982 -2.362745,-3.156145 -4.121095,-1.091744 -4.708741,5.528321 -13.563056,4.719295 -16.8697312,-1.5414 -3.106981,-5.882607 0.9007642,-12.755247 7.9437162,-13.622202 2.744082,-0.337785 2.91676,-0.552183 2.646226,-3.28558 C 19.4786,9.5284395 32.560401,4.3177968 39.19768,11.960048 c 0.786451,0.905532 1.679808,1.64642 1.985235,1.64642 0.305428,0 1.308931,-0.650225 2.23001,-1.444944 2.324802,-2.005873 4.014555,-2.7345215 6.83716,-2.9482911 2.648443,-0.2005795 5.061681,0.5478219 7.55712,2.3436391 1.539503,1.107888 3.719661,5.064486 3.719661,6.750526 0,2.221558 0.229718,2.400209 3.086325,2.400209 3.194247,0 5.582276,0.983978 7.122452,2.934776 1.472027,1.864481 1.447815,1.855029 4.214641,1.645484 1.957558,-0.148256 2.769713,-0.03248 4.017282,0.572683 6.504811,3.155306 6.501523,10.833837 -0.006,13.990359 -1.330839,0.645536 -2.015025,0.725868 -4.496556,0.527954 l -2.926876,-0.233431 -1.745727,1.449822 c -3.808214,3.162719 -8.852573,2.715991 -12.026573,-1.065072 -1.434846,-1.709278 -2.096326,-1.859985 -3.085728,-0.70303 -2.037608,2.382676 -3.604439,3.87139 -4.846466,4.604843 -3.32627,1.96425 -7.831929,2.566935 -11.376571,1.521745 z"
+     id="path2" />
+  <path
+     style="fill:#ffffff;stroke-width:3"
+     d="M 17.16,70.04 V 44.25 l 2.08,-0 c 2.84,-0 4.64,-0.53 7.1,-2.1 1.21,-0.77 2.15,-1.15 2.24,-0.91 0.38,1.07 3.35,4.13 5.04,5.18 3.19,1.99 5.9,2.76 9.69,2.75 5.04,-0.01 9.19,-1.63 12.43,-4.87 l 1.14,-1.14 1.43,1.08 c 3.96,2.99 10.03,2.97 14.02,-0.05 1.2,-0.91 1.73,-1.09 2.67,-0.89 l 1.18,0.24 v 26.13 26.13 H 69.65 63.12 L 63.02,78.54 62.91,61.26 h -1.19 -1.19 l -0.1,17.29 -0.1,17.29 h -6.13 -6.13 L 47.96,78.54 47.86,61.26 H 46.67 45.48 L 45.38,78.54 45.28,95.83 H 38.16 31.03 L 30.93,78.54 30.83,61.26 29.88,61.13 c -0.52,-0.07 -1.1,0.1 -1.28,0.37 -0.18,0.27 -0.34,8.11 -0.34,17.41 l -0.01,16.91 H 22.71 17.16 Z"
+     id="path3" />
+  <path
+     style="fill:#ffffff;stroke-width:3"
+     d="m 20.725826,111.26347 c -0.923789,-0.31861 -2.395045,-1.68829 -3.008587,-2.80088 -0.384117,-0.69654 -0.556553,-2.34664 -0.556553,-5.32585 v -4.316617 h 29.511432 29.511433 v 4.503487 c 0,5.07402 -0.39768,6.26489 -2.495024,7.47146 -1.224586,0.70448 -2.146488,0.72859 -26.818345,0.70145 -14.052592,-0.0155 -25.817551,-0.12033 -26.144356,-0.23305 z"
+     id="path4" />
+  <path
+     style="fill:#ffffff;stroke-width:3"
+     d="M 79.352563,67.986235 V 49.859646 l 3.664172,5.81e-4 c 4.248939,6.73e-4 5.910064,0.58554 7.320446,2.577462 0.895644,1.264945 0.899181,1.326086 0.899181,15.548546 0,14.222458 -0.0036,14.2836 -0.899181,15.548545 -1.410382,1.991922 -3.071507,2.576789 -7.320446,2.577463 l -3.664172,5.8e-4 z"
+     id="path5" />
+</svg>
+{% else %}
+<svg class="image w--7 h--7" viewBox="-5.0 -10.0 110.0 135.0" xmlns="http://www.w3.org/2000/svg">
+  <path
+     d="M 56.497031,53.693647 95.47469,0.72300883 c 1.2543,-1.7110822 1.442805,-3.98036153 0.485774,-5.88005833 C 95.003413,-7.049322 93.06034,-8.2457506 90.936057,-8.2457506 H 5.2520261 c -2.1242816,0 -4.0674109,1.1962986 -5.02440536,3.0887011 -0.95703155,1.8995112 -0.76852829,4.16893907 0.49302964,5.88005833 L 39.698309,53.693647 c 1.094791,1.486311 1.689329,3.284332 1.682072,5.133173 v 43.71252 c 0.0073,1.66031 -1.000538,3.15384 -2.54487,3.76282 l -16.538035,6.66296 -0.340757,0.18125 c -1.979323,1.31957 -2.86393,3.78473 -2.17514,6.06122 0.688773,2.27666 2.791359,3.84264 5.169553,3.84264 h 46.286897 c 2.378008,-0.007 4.48076,-1.56607 5.169551,-3.84264 0.688772,-2.27667 -0.19576,-4.74173 -2.175139,-6.06122 L 57.35363,106.30208 c -1.537055,-0.60901 -2.54487,-2.10256 -2.54487,-3.76283 V 58.826737 c 0,-1.848821 0.587282,-3.646823 1.68933,-5.133172 z m -0.565529,56.138963 16.320503,6.57609 c 0.522022,0.42777 0.717783,1.1383 0.485772,1.77632 -0.224751,0.63803 -0.82653,1.05854 -1.500806,1.05854 H 24.950073 c -0.674276,0 -1.276055,-0.42051 -1.508064,-1.05854 -0.224753,-0.63802 -0.029,-1.34855 0.493012,-1.77632 l 16.327741,-6.57609 h -0.0073 c 2.987173,-1.18904 4.93754,-4.08189 4.930117,-7.29383 V 58.826262 c 0,-2.660874 -0.848284,-5.249177 -2.428866,-7.388122 L 3.779105,-1.5324984 C 3.3730872,-2.0835311 3.3078277,-2.8230487 3.6195993,-3.4392483 3.9313655,-4.0555222 4.5621348,-4.4397864 5.2509254,-4.4397864 H 90.934956 c 0.688773,0 1.319561,0.3842642 1.631328,1.0005381 0.311764,0.6162738 0.253762,1.3558099 -0.159508,1.9067499 L 53.429118,51.43814 c -1.580563,2.13876 -2.428865,4.727248 -2.421626,7.388122 v 43.712518 c -0.0073,3.21194 1.943129,6.10483 4.922878,7.29383 z"
+     id="path1"
+     style="stroke-width:1.85607" />
+  <path
+     d="M 52.807146,47.559306 75.087519,17.672723 H 21.10903 l 22.280371,29.886583 c 1.109304,1.486311 2.849452,2.363531 4.705531,2.363531 1.856079,0 3.603393,-0.877294 4.712771,-2.363531 z"
+     id="path2"
+     style="stroke-width:1.85607" />
+  <path
+     style="fill:#ffffff;stroke-width:0.167286"
+     d="m 29.358736,129.01472 c -0.616539,-0.30806 -1.018156,-1.20033 -0.809585,-1.79864 0.09152,-0.26253 0.254656,-0.54618 0.362528,-0.63033 0.107869,-0.0842 3.80951,-1.60195 8.225867,-3.37289 4.416357,-1.77095 8.479131,-3.4567 9.028385,-3.74612 1.972131,-1.03918 3.509291,-3.14197 3.931028,-5.37752 0.136772,-0.72501 0.175406,-7.43734 0.139132,-24.172863 -0.05632,-25.984536 0.03946,-24.006196 -1.290423,-26.65341 C 48.562275,62.49978 40.938174,51.994372 28.546518,35.15453 17.663696,20.365143 8.6837149,8.04714 8.5910041,7.7811897 8.3512676,7.0934811 8.8257976,6.1406932 9.5610452,5.8334872 10.028295,5.6382577 16.860814,5.608858 53.374941,5.6449601 l 43.260319,0.042772 0.488133,0.5463195 c 1.054559,1.1802676 1.84739,-0.057939 -12.075469,18.8588854 -27.902324,37.910554 -27.258036,37.02341 -27.92456,38.450375 -1.22446,2.621454 -1.166115,1.265499 -1.166115,27.10116 0,22.721608 0.0063,23.179108 0.336123,24.246818 0.406894,1.31736 1.448508,2.92418 2.402164,3.70563 1.020242,0.83602 1.870805,1.21379 10.560969,4.69057 4.359585,1.74419 7.99288,3.29217 8.155205,3.47455 0.330106,0.3709 0.382777,1.14936 0.112,1.65531 -0.44846,0.83796 0.355409,0.81145 -24.530419,0.80881 -18.226099,-0.002 -23.306232,-0.0474 -23.634555,-0.21144 z M 55.640783,59.424676 c 0.496083,-0.243443 1.180727,-0.71432 1.52143,-1.046394 0.549686,-0.535762 23.051541,-30.581956 23.051541,-30.780177 0,-0.04374 -12.195167,-0.07952 -27.100371,-0.07952 -14.905205,0 -27.100372,0.04552 -27.100372,0.101157 0,0.08799 5.33664,7.27247 19.249874,25.915245 3.797498,5.088388 4.234751,5.543617 5.893222,6.135504 1.277352,0.455872 3.278288,0.346196 4.484676,-0.245817 z"
+     id="path3"
+     transform="translate(-5,-10)" />
+</svg>
+{% endif %}
+{% endcapture %}
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Noto+Sans+Arabic:wght@400;700&display=swap');
 
   .title_bar bdi {
     font-family: 'Noto Sans', 'Noto Sans Arabic', sans-serif;
   }
-
-  .city-name {
-    font-weight: bold;
+  .main-title-base,
+  .main-title-large,
+  .main-title-xlarge,
+  .main-title-xxlarge {
+    font-family: 'Noto Sans', 'Noto Sans Arabic', sans-serif;
+    line-height: 1.2;
   }
-  .city-name-lg {
-      font-weight: bold;
-      text-decoration: underline;
-  }
+  .main-title-base    { font-size: var(--title-font-size); }
+  .main-title-large   { font-size: var(--title-large-font-size); }
+  .main-title-xlarge  { font-size: var(--title-xlarge-font-size); }
+  .main-title-xxlarge { font-size: var(--title-xxlarge-font-size); }
 
   .map-background {
     position: absolute;
@@ -166,7 +177,6 @@
     z-index: 1;
     overflow: hidden;
   }
-
 
   .map-overlay {
     position: relative;
@@ -188,43 +198,35 @@
 
 </style>
 
+{% if data.count > 0 %}
+{% assign rand = "now" | date: '%N' | modulo: data.count %}
+{% assign city = data.cities[rand] %}
+{% endif %}
+
+
 
 <!-- Map as background -->
 <div class="map-background bg--gray-50 w--full h--full">
-
+  {% if city %}
   <svg class="map-svg image image-dither w--full h--full" viewBox="0 0 768 768" preserveAspectRatio="xMidYMid slice">
     <g class="map-tiles"></g>
     <g class="pin-group"></g>
   </svg>
+  {% else %}
+    <img class="image image--cover image-dither w--full h--full" src="https://raw.githubusercontent.com/ExcuseMi/trmnl-its5oclock-somewhere-plugin/refs/heads/main/assets/images/leonardo-cheers.webp" alt="Cheers"/>
+  {% endif %}
 </div>
 <div class="layout">
 <!-- Content on top -->
 <div class="map-overlay w--full h--full flex flex--col">
-  <div class="text-container text--center {{text_container_class}} pr--5 pb--0 pl--5">
-    <div class="text--center {{title_class}} bg--white rounded--large">
-    It's 5 o'clock in <span class="city-name lg:city-name-lg">{{ city.name }}</span>{% if city.country != '' %}, {{ city.country }}{% endif %}
-
-    </div>
+ {% render "main_title", trmnl:trmnl, text_container_class: text_container_class, title_class:title_class, city: city %}
   </div>
 
 </div>
 </div>
-<div class="title_bar pr--0">
+<div class="title_bar pr--0" style="z-index: 1;">
   {% render "title", trmnl: trmnl, view:view, cheers_icon: cheers_icon, city:city %}
-
-
 </div>
-{% else %}
-<div class="layout layout--center">
-  <div class="text--center title--large">It's 5 O'Clock Somewhere</div>
-</div>
-
-<div class="title_bar">
-   {% render "title", trmnl: trmnl, view:view, cheers_icon: cheers_icon %}
-
-
-</div>
-{% endif %}
 
 <script>
   (function() {
@@ -312,139 +314,139 @@
       return { x: offsetX, y: Math.round(safeCenterY - cityPos.y) };
     }
 
-function renderMap(tileInfo) {
-  const mapTiles = root.querySelector('.map-tiles');
-  if (!mapTiles) return;
-  mapTiles.innerHTML = '';
+    function renderMap(tileInfo) {
+      const mapTiles = root.querySelector('.map-tiles');
+      if (!mapTiles) return;
+      mapTiles.innerHTML = '';
 
-  const centerX = tileInfo.centerTile.x;
-  const centerY = tileInfo.centerTile.y;
-  const n = Math.pow(2, ZOOM);
-  const cityPos = latLonToPixels(tileInfo.lat, tileInfo.lon, tileInfo.centerTile);
-  const offsets = computeOffsets(cityPos);
+      const centerX = tileInfo.centerTile.x;
+      const centerY = tileInfo.centerTile.y;
+      const n = Math.pow(2, ZOOM);
+      const cityPos = latLonToPixels(tileInfo.lat, tileInfo.lon, tileInfo.centerTile);
+      const offsets = computeOffsets(cityPos);
 
-  // Cache for tile patterns: key = "tx,ty" -> patternId
-  const tileCache = {};
+      // Cache for tile patterns: key = "tx,ty" -> patternId
+      const tileCache = {};
 
-  for (let dy = -2; dy <= 2; dy++) {
-    for (let dx = -2; dx <= 2; dx++) {
-      const tx = (centerX + dx + n) % n;
-      const ty = centerY + dy;
+      for (let dy = -2; dy <= 2; dy++) {
+        for (let dx = -2; dx <= 2; dx++) {
+          const tx = (centerX + dx + n) % n;
+          const ty = centerY + dy;
 
-      if (ty < 0 || ty >= n) continue;
+          if (ty < 0 || ty >= n) continue;
 
-      const x = (dx + 1) * TILE_SIZE;
-      const y = (dy + 1) * TILE_SIZE;
-      const tileKey = `${tx},${ty}`;
+          const x = (dx + 1) * TILE_SIZE;
+          const y = (dy + 1) * TILE_SIZE;
+          const tileKey = `${tx},${ty}`;
 
-      // If we already created a pattern for this tile, reuse it
-      if (tileCache[tileKey]) {
-        const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-        rect.setAttribute('x', x);
-        rect.setAttribute('y', y);
-        rect.setAttribute('width', TILE_SIZE);
-        rect.setAttribute('height', TILE_SIZE);
-        rect.setAttribute('fill', `url(#${tileCache[tileKey]})`);
-        rect.setAttribute('shape-rendering', 'crispEdges');
-        mapTiles.appendChild(rect);
-        continue;
+          // If we already created a pattern for this tile, reuse it
+          if (tileCache[tileKey]) {
+            const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            rect.setAttribute('x', x);
+            rect.setAttribute('y', y);
+            rect.setAttribute('width', TILE_SIZE);
+            rect.setAttribute('height', TILE_SIZE);
+            rect.setAttribute('fill', `url(#${tileCache[tileKey]})`);
+            rect.setAttribute('shape-rendering', 'crispEdges');
+            mapTiles.appendChild(rect);
+            continue;
+          }
+
+          const patternId = `tile-${instanceId}-${tx}-${ty}-${dx}-${dy}`;
+          tileCache[tileKey] = patternId;
+
+          const pattern = document.createElementNS('http://www.w3.org/2000/svg', 'pattern');
+          pattern.setAttribute('id', patternId);
+          pattern.setAttribute('patternUnits', 'userSpaceOnUse');
+          pattern.setAttribute('x', x);
+          pattern.setAttribute('y', y);
+          pattern.setAttribute('width', TILE_SIZE);
+          pattern.setAttribute('height', TILE_SIZE);
+
+          const img = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+          const subdomain = SUBDOMAINS[(tx + ty) % SUBDOMAINS.length];
+          {% assign tiles = trmnl.plugin_settings.custom_fields_values.map_tiles | default: "osm" %}
+          {% if tiles == "carto_light" %}
+          const tileUrl = `https://${subdomain}.basemaps.cartocdn.com/light_all/${ZOOM}/${tx}/${ty}.png`;
+          {% elsif tiles == "carto_light_no_labels" %}
+          const tileUrl = `https://${subdomain}.basemaps.cartocdn.com/light_nolabels/${ZOOM}/${tx}/${ty}.png`;
+          {% else %}
+          const tileUrl = `https://tile.openstreetmap.org/${ZOOM}/${tx}/${ty}.png`;
+          {% endif %}
+          img.setAttributeNS('http://www.w3.org/1999/xlink', 'href', tileUrl);
+          img.setAttribute('width', TILE_SIZE);
+          img.setAttribute('height', TILE_SIZE);
+          img.setAttribute('preserveAspectRatio', 'none');
+
+
+          // Fix error handler – define fallbackUrl properly
+          img.addEventListener('error', function() {
+            // Optionally try a different tile source
+            {% if tiles == "osm" %}
+            const fallbackUrl = `https://${subdomain}.basemaps.cartocdn.com/light_all/${ZOOM}/${tx}/${ty}.png`;
+            {% else %}
+            const fallbackUrl = `https://tile.openstreetmap.org/${ZOOM}/${tx}/${ty}.png`;
+            {% endif %}
+            this.setAttributeNS('http://www.w3.org/1999/xlink', 'href', fallbackUrl);
+          });
+
+          pattern.appendChild(img);
+
+          const mapSvg = root.querySelector('.map-svg');
+          let defs = mapSvg.querySelector('defs');
+          if (!defs) {
+            defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+            mapSvg.appendChild(defs);
+          }
+          defs.appendChild(pattern);
+
+          const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+          rect.setAttribute('x', x);
+          rect.setAttribute('y', y);
+          rect.setAttribute('width', TILE_SIZE);
+          rect.setAttribute('height', TILE_SIZE);
+          rect.setAttribute('fill', `url(#${patternId})`);
+          rect.setAttribute('shape-rendering', 'crispEdges');
+
+          mapTiles.appendChild(rect);
+        }
       }
 
-      const patternId = `tile-${instanceId}-${tx}-${ty}-${dx}-${dy}`;
-      tileCache[tileKey] = patternId;
-
-      const pattern = document.createElementNS('http://www.w3.org/2000/svg', 'pattern');
-      pattern.setAttribute('id', patternId);
-      pattern.setAttribute('patternUnits', 'userSpaceOnUse');
-      pattern.setAttribute('x', x);
-      pattern.setAttribute('y', y);
-      pattern.setAttribute('width', TILE_SIZE);
-      pattern.setAttribute('height', TILE_SIZE);
-
-      const img = document.createElementNS('http://www.w3.org/2000/svg', 'image');
-      const subdomain = SUBDOMAINS[(tx + ty) % SUBDOMAINS.length];
-      {% assign tiles = trmnl.plugin_settings.custom_fields_values.map_tiles | default: "osm" %}
-      {% if tiles == "carto_light" %}
-      const tileUrl = `https://${subdomain}.basemaps.cartocdn.com/light_all/${ZOOM}/${tx}/${ty}.png`;
-      {% elsif tiles == "carto_light_no_labels" %}
-      const tileUrl = `https://${subdomain}.basemaps.cartocdn.com/light_nolabels/${ZOOM}/${tx}/${ty}.png`;
-      {% else %}
-      const tileUrl = `https://tile.openstreetmap.org/${ZOOM}/${tx}/${ty}.png`;
-      {% endif %}
-      img.setAttributeNS('http://www.w3.org/1999/xlink', 'href', tileUrl);
-      img.setAttribute('width', TILE_SIZE);
-      img.setAttribute('height', TILE_SIZE);
-      img.setAttribute('preserveAspectRatio', 'none');
-
-
-      // Fix error handler – define fallbackUrl properly
-      img.addEventListener('error', function() {
-        // Optionally try a different tile source
-        {% if tiles == "osm" %}
-        const fallbackUrl = `https://${subdomain}.basemaps.cartocdn.com/light_all/${ZOOM}/${tx}/${ty}.png`;
-        {% else %}
-        const fallbackUrl = `https://tile.openstreetmap.org/${ZOOM}/${tx}/${ty}.png`;
-        {% endif %}
-        this.setAttributeNS('http://www.w3.org/1999/xlink', 'href', fallbackUrl);
-      });
-
-      pattern.appendChild(img);
-
-      const mapSvg = root.querySelector('.map-svg');
-      let defs = mapSvg.querySelector('defs');
-      if (!defs) {
-        defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
-        mapSvg.appendChild(defs);
-      }
-      defs.appendChild(pattern);
-
-      const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-      rect.setAttribute('x', x);
-      rect.setAttribute('y', y);
-      rect.setAttribute('width', TILE_SIZE);
-      rect.setAttribute('height', TILE_SIZE);
-      rect.setAttribute('fill', `url(#${patternId})`);
-      rect.setAttribute('shape-rendering', 'crispEdges');
-
-      mapTiles.appendChild(rect);
+      mapTiles.setAttribute('transform', `translate(${offsets.x}, ${offsets.y})`);
+      addPinToSVG(tileInfo.lat, tileInfo.lon, tileInfo.centerTile, offsets);
     }
-  }
 
-  mapTiles.setAttribute('transform', `translate(${offsets.x}, ${offsets.y})`);
-  addPinToSVG(tileInfo.lat, tileInfo.lon, tileInfo.centerTile, offsets);
-}
+    function addPinToSVG(lat, lon, centerTile, offsets) {
+      const pinGroup = root.querySelector('.pin-group');
+      if (!pinGroup) return;
 
-function addPinToSVG(lat, lon, centerTile, offsets) {
-  const pinGroup = root.querySelector('.pin-group');
-  if (!pinGroup) return;
+      pinGroup.innerHTML = '';
 
-  pinGroup.innerHTML = '';
+      const pos = latLonToPixels(lat, lon, centerTile);
 
-  const pos = latLonToPixels(lat, lon, centerTile);
+      // Get raw inner content of the icon, stripping outer <svg> tags and class attributes
+      let iconHTML = `{{ icon }}`;
+      iconHTML = iconHTML.replace(/<svg[^>]*>/g, '').replace(/<\/svg>/g, '');
+      iconHTML = iconHTML.replace(/ class="[^"]*"/g, '');
 
-  // Get raw inner content of the icon, stripping outer <svg> tags and class attributes
-  let iconHTML = `{{ icon }}`;
-  iconHTML = iconHTML.replace(/<svg[^>]*>/g, '').replace(/<\/svg>/g, '');
-  iconHTML = iconHTML.replace(/ class="[^"]*"/g, '');
+      // Desired height in pixels
+      const desiredHeight = 64;
+      const originalHeight = 125; // from viewBox
+      const scale = desiredHeight / originalHeight;
 
-  // Desired height in pixels
-  const desiredHeight = 64;
-  const originalHeight = 125; // from viewBox
-  const scale = desiredHeight / originalHeight;
+      // Adjustment: if icon appears too high, increase this positive value to move it down
+      const verticalAdjust = 0; // pixels after scaling
 
-  // Adjustment: if icon appears too high, increase this positive value to move it down
-  const verticalAdjust = 0; // pixels after scaling
+      // Calculate translation so that the icon's bottom (approx y=125) aligns with pin,
+      // plus a manual adjustment.
+      const tx = pos.x - 50 * scale + offsets.x;
+      const ty = pos.y - 125 * scale + offsets.y + verticalAdjust;
 
-  // Calculate translation so that the icon's bottom (approx y=125) aligns with pin,
-  // plus a manual adjustment.
-  const tx = pos.x - 50 * scale + offsets.x;
-  const ty = pos.y - 125 * scale + offsets.y + verticalAdjust;
-
-  const icon = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-  icon.setAttribute('transform', `translate(${tx}, ${ty}) scale(${scale})`);
-  icon.innerHTML = iconHTML;
-  pinGroup.appendChild(icon);
-}
+      const icon = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      icon.setAttribute('transform', `translate(${tx}, ${ty}) scale(${scale})`);
+      icon.innerHTML = iconHTML;
+      pinGroup.appendChild(icon);
+    }
 
 
     function init() {
