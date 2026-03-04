@@ -6,7 +6,8 @@
   <span class="title text--stroke {% if view < 3 %}hidden{% else %}md:portrait:inline md:hidden lg:portrait:none lg:hidden  {% endif %}">
     5 O'Clock
   </span>
-  {% if city and city.toast and city.toast != "" and trmnl.plugin_settings.custom_fields_values.show_toast == "true" %}
+  {% assign show_toast = trmnl.plugin_settings.custom_fields_values.show_toast | default: "true" %}
+  {% if city and city.toast and city.toast != "" and show_toast %}
     <span class="bg--black text--white rounded p--2  mr--0 {% if view >= 3 %} md:hidden lg:inline lg:portrait:hidden{% endif %}" style="margin-left: auto; font-weight:bold;color:white;background-color:black;">
     <bdi>{{ city.toast | escape }}</bdi>{% if city.pronunciation != "" %} /{{ city.pronunciation | escape }}/{% endif %} !
   </span>
