@@ -366,30 +366,16 @@
 
           const img = document.createElementNS('http://www.w3.org/2000/svg', 'image');
           const subdomain = SUBDOMAINS[(tx + ty) % SUBDOMAINS.length];
-          {% assign tiles = trmnl.plugin_settings.custom_fields_values.map_tiles | default: "osm" %}
-          {% if tiles == "carto_light" %}
-          const tileUrl = `https://${subdomain}.basemaps.cartocdn.com/light_all/${ZOOM}/${tx}/${ty}.png`;
-          {% elsif tiles == "carto_light_no_labels" %}
+          {% assign tiles = trmnl.plugin_settings.custom_fields_values.map_tiles | default: "carto_light" %}
+          {% if tiles == "carto_light_no_labels" %}
           const tileUrl = `https://${subdomain}.basemaps.cartocdn.com/light_nolabels/${ZOOM}/${tx}/${ty}.png`;
           {% else %}
-          const tileUrl = `https://tile.openstreetmap.org/${ZOOM}/${tx}/${ty}.png`;
+          const tileUrl = `https://${subdomain}.basemaps.cartocdn.com/light_all/${ZOOM}/${tx}/${ty}.png`;
           {% endif %}
           img.setAttributeNS('http://www.w3.org/1999/xlink', 'href', tileUrl);
           img.setAttribute('width', TILE_SIZE);
           img.setAttribute('height', TILE_SIZE);
           img.setAttribute('preserveAspectRatio', 'none');
-
-
-          // Fix error handler – define fallbackUrl properly
-          img.addEventListener('error', function() {
-            // Optionally try a different tile source
-            {% if tiles == "osm" %}
-            const fallbackUrl = `https://${subdomain}.basemaps.cartocdn.com/light_all/${ZOOM}/${tx}/${ty}.png`;
-            {% else %}
-            const fallbackUrl = `https://tile.openstreetmap.org/${ZOOM}/${tx}/${ty}.png`;
-            {% endif %}
-            this.setAttributeNS('http://www.w3.org/1999/xlink', 'href', fallbackUrl);
-          });
 
           pattern.appendChild(img);
 
