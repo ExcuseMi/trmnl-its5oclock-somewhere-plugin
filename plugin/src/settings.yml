@@ -4,6 +4,8 @@ no_screen_padding: 'no'
 dark_mode: 'no'
 static_data: ''
 polling_verb: get
+framework_version: 2.3.7
+serverless_language: node
 polling_url: '{% assign h = trmnl.system.timestamp_utc | date: "%H" | plus: 0 %}{% assign offset = 17 | minus: h %}{% if offset > 14 %}{% assign offset = 14 %}{% endif %}{% if offset >= 0 %}https://raw.githubusercontent.com/ExcuseMi/trmnl-its5oclock-somewhere-plugin/refs/heads/main/data/cities/utc%2B{{ offset }}.json{% else %}https://raw.githubusercontent.com/ExcuseMi/trmnl-its5oclock-somewhere-plugin/refs/heads/main/data/cities/utc{{ offset }}.json{% endif %}'
 polling_headers: ''
 polling_body: ''
@@ -31,5 +33,5 @@ custom_fields:
   default: true
   description: Display a local toast phrase in the title bar — like <em>Cheers</em> or <em>Santé</em> — in the language spoken where it's 5 o'clock.
   help_text: Appears as an icon + phrase on the right side of the title bar.
-name: " It's 5 O'Clock Somewhere"
+name: It's 5 O'Clock Somewhere
 refresh_interval: 60
