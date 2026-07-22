@@ -204,6 +204,14 @@ with open(GEONAMES_TXT_FILE, encoding="utf-8") as f:
                            "tier": FEATURE_PRIORITY.get(feature_code, 5)})
 print(f"  {len(cities)} cities")
 
+# Pacific/Kiritimati (Kiribati's Line Islands) is the only inhabited place on Earth at
+# UTC+14, but its population is well under the cities15000 cutoff, so GeoNames never
+# includes it. Without a guaranteed entry, offset "+14" — which the plugin's polling_url
+# can request between 00:00-02:59 UTC — never gets a data file, so TRMNL 404s on every
+# poll during that window. Add it manually so that offset always resolves.
+cities.append({"name": "Kiritimati", "lat": 1.94, "lon": -157.475, "country": "Kiribati",
+               "state": "", "tz": "Pacific/Kiritimati", "pop": 0, "tier": 0})
+
 # Sort: capitals and admin seats first (tier), then by population descending.
 # cap_bucket's round-robin will therefore always prefer well-known cities.
 cities.sort(key=lambda c: (c["tier"], -c["pop"]))
