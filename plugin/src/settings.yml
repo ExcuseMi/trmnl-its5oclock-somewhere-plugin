@@ -10,6 +10,26 @@ polling_url: '{% assign h = trmnl.system.timestamp_utc | date: "%H" | plus: 0 %}
 polling_headers: ''
 polling_body: ''
 id: 253752
+oauth_enabled: 'false'
+oauth_pkce_enabled: 'no'
+oauth_authorize_url: ''
+oauth_token_url: ''
+oauth_scopes: ''
+oauth_scope_separator: ''
+oauth_refresh_url: ''
+oauth_auth_params: ''
+oauth_token_headers: ''
+oauth_token_site: ''
+oauth_token_params: ''
+oauth_token_request_auth_method: ''
+oauth_body_format: ''
+oauth_token_response_metadata: ''
+oauth_authorization_method: ''
+oauth_refresh_params: ''
+oauth_token_field_name: ''
+oauth_expiry_field_name: ''
+oauth_expiry_strategy: ''
+oauth_fixed_expiry_ms: ''
 custom_fields:
 - keyname: author_bio
   field_type: author_bio
@@ -34,4 +54,5 @@ custom_fields:
   description: Display a local toast phrase in the title bar — like <em>Cheers</em> or <em>Santé</em> — in the language spoken where it's 5 o'clock.
   help_text: Appears as an icon + phrase on the right side of the title bar.
 name: It's 5 O'Clock Somewhere
+description:
 refresh_interval: 60
