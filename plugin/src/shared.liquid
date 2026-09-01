@@ -214,6 +214,17 @@
   <link href="https://trmnl.com/js/maplibre-gl/5.24.0/maplibre-gl.css" rel="stylesheet">
   <div id="{{ map_instance }}-map" class="map" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;"></div>
   <svg id="{{ map_instance }}-overlay" class="map-svg w--full h--full" style="position:absolute;top:0;left:0;z-index:5;" preserveAspectRatio="none">
+    <defs>
+      <filter id="{{ map_instance }}-pin-outline" x="-50%" y="-50%" width="200%" height="200%">
+        <feMorphology operator="dilate" radius="5" in="SourceAlpha" result="dilated"/>
+        <feFlood flood-color="#000000"/>
+        <feComposite in2="dilated" operator="in" result="outline"/>
+        <feMerge>
+          <feMergeNode in="outline"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+    </defs>
     <g class="pin-group"></g>
   </svg>
   {% else %}
@@ -269,14 +280,29 @@
       const originalHeight = 125; // from viewBox
       const scale = desiredHeight / originalHeight;
 
-      // Calculate translation so that the icon's bottom (approx y=125) aligns with the pin.
+      // The icon artwork itself has no sharp tip, so its own bottom edge
+      // doesn't clearly mark the actual target point. Sit it above a
+      // separate, guaranteed-sharp triangular pointer whose apex is the
+      // exact projected coordinate — classic map-pin silhouette.
+      const tipHeight = 14;
+      const tipWidth = 10;
+      const bulbBottomY = pos.y - tipHeight;
+
       const tx = pos.x - 50 * scale;
-      const ty = pos.y - 125 * scale;
+      const ty = bulbBottomY - 125 * scale;
 
       const icon = document.createElementNS('http://www.w3.org/2000/svg', 'g');
       icon.setAttribute('transform', `translate(${tx}, ${ty}) scale(${scale})`);
+      icon.setAttribute('filter', `url(#${mapInstance}-pin-outline)`);
       icon.innerHTML = iconHTML;
       pinGroup.appendChild(icon);
+
+      const half = tipWidth / 2;
+      const tip = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      tip.setAttribute('d', `M ${pos.x - half} ${bulbBottomY} L ${pos.x + half} ${bulbBottomY} L ${pos.x} ${pos.y} Z`);
+      tip.setAttribute('fill', '#000000');
+      tip.setAttribute('filter', `url(#${mapInstance}-pin-outline)`);
+      pinGroup.appendChild(tip);
     }
 
     function init() {
