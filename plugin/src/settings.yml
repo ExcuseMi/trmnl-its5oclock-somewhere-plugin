@@ -54,5 +54,5 @@ custom_fields:
   description: Display a local toast phrase in the title bar — like <em>Cheers</em> or <em>Santé</em> — in the language spoken where it's 5 o'clock.
   help_text: Appears as an icon + phrase on the right side of the title bar.
 name: It's 5 O'Clock Somewhere
-description:
+description: Find a city where it's 5 o'clock
 refresh_interval: 60

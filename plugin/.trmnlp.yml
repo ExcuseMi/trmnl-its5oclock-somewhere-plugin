@@ -38,67 +38,28 @@ variables:
       no_screen_padding: "no"
       polling_headers: ""
       custom_fields_values: {}
-  data:
-    count: 10
-    cities:
-      - lat: 0.32779
-        lon: -79.47407
-        name: Rosa Zarate
-        toast: Salud
-        country: Ecuador
-        pronunciation: sah-lood
-      - lat: -4.57722
-        lon: -81.27194
-        name: Talara
-        toast: Salud
-        country: Peru
-        pronunciation: sah-lood
-      - lat: 21.46122
-        lon: -71.14188
-        name: Cockburn Town
-        toast: Cheers
-        country: Turks and Caicos Islands
-        pronunciation: ""
-      - lat: 45.40008
-        lon: -72.73243
-        name: Granby
-        toast: "Santé"
-        country: Canada
-        pronunciation: sahn-tay
-      - lat: 19.2866
-        lon: -81.37436
-        name: George Town
-        toast: Cheers
-        country: Cayman Islands
-        pronunciation: ""
-      - lat: 19.5775
-        lon: -88.04529
-        name: Felipe Carrillo Puerto
-        toast: Salud
-        country: Mexico
-        pronunciation: sah-lood
-      - lat: 25.05823
-        lon: -77.34306
-        name: Nassau
-        toast: Cheers
-        country: Bahamas
-        pronunciation: ""
-      - lat: -4.37555
-        lon: -70.03179
-        name: Benjamin Constant
-        toast: "Saúde"
-        country: Brazil
-        pronunciation: sah-oo-dee
-      - lat: 9.05032
-        lon: -79.47068
-        name: San Miguelito
-        toast: Salud
-        country: Panama
-        pronunciation: sah-lood
-      - lat: 18.47116
-        lon: -77.91883
-        name: Montego Bay
-        toast: Cheers
-        country: Jamaica
-        pronunciation: ""
+  # NOTE: transform.js reads input.countries directly (raw polled shape:
+  # {country: {t?, p?, c: [{n, y, x, z?, t?, p?}]}}) — mock fields must sit
+  # here, not nested under a data: key, or transform()'s early-return kicks
+  # in and aqi_response-equivalent ends up empty.
+  countries:
+    Ecuador:
+      t: Salud
+      p: sah-lood
+      c:
+        - { n: Rosa Zarate, y: 0.32779, x: -79.47407 }
+    Peru:
+      t: Salud
+      p: sah-lood
+      c:
+        - { n: Talara, y: -4.57722, x: -81.27194 }
+    Turks and Caicos Islands:
+      t: Cheers
+      c:
+        - { n: Cockburn Town, y: 21.46122, x: -71.14188 }
+    Canada:
+      t: "Santé"
+      p: sahn-tay
+      c:
+        - { n: Granby, y: 45.40008, x: -72.73243 }
 
