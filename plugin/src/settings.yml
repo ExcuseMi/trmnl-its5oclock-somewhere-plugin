@@ -4,7 +4,7 @@ no_screen_padding: 'no'
 dark_mode: 'no'
 static_data: ''
 polling_verb: get
-framework_version: 2.3.7
+framework_version: 3.3.1
 serverless_language: node
 polling_url: '{% assign h = trmnl.system.timestamp_utc | date: "%H" | plus: 0 %}{% assign offset = 17 | minus: h %}{% if offset > 14 %}{% assign offset = 14 %}{% endif %}{% if offset >= 0 %}https://raw.githubusercontent.com/ExcuseMi/trmnl-its5oclock-somewhere-plugin/refs/heads/main/data/cities/utc%2B{{ offset }}.json{% else %}https://raw.githubusercontent.com/ExcuseMi/trmnl-its5oclock-somewhere-plugin/refs/heads/main/data/cities/utc{{ offset }}.json{% endif %}'
 polling_headers: ''
